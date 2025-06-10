@@ -1,0 +1,2690 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solar Robot Management System</title>
+    <!-- Add Font Awesome for professional icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2d72d9;
+            --primary-dark: #1a56b0;
+            --primary-light: #b8d9ff;
+            --secondary-color: #f9a826;
+            --tertiary-color: #1db954;
+            --sidebar-width: 240px;
+            --sidebar-bg: #0a2540;
+            --sidebar-text: #e0e9f5;
+            --border-color: #e6e9ed;
+            --hover-bg: rgba(249, 168, 38, 0.12);
+            --active-bg: rgba(249, 168, 38, 0.18);
+            --text-primary: #273240;
+            --text-secondary: #5d6b82;
+            --shadow-sm: 0 2px 8px rgba(10, 37, 64, 0.05);
+            --shadow-md: 0 4px 12px rgba(10, 37, 64, 0.08);
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --gradient-solar: linear-gradient(135deg, #f9a826 0%, #f7d358 100%);
+            --gradient-header: linear-gradient(90deg, #0a2540 0%, #1a56b0 100%);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', 'Roboto', 'Inter', sans-serif;
+        }
+
+        body {
+            display: flex;
+            min-height: 100vh;
+            background-color: #f2f5fc;
+            color: var(--text-primary);
+            background-image:
+                radial-gradient(circle at 20% 20%, rgba(249, 168, 38, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(45, 114, 217, 0.03) 0%, transparent 50%);
+        }
+
+        .sidebar {
+            width: var(--sidebar-width);
+            background-color: var(--sidebar-bg);
+            border-right: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            height: 100vh;
+            box-shadow: var(--shadow-md);
+            z-index: 10;
+            color: var(--sidebar-text);
+        }
+
+        .sidebar-header {
+            padding: 24px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            background: linear-gradient(to right, rgba(255, 255, 255, 0.05), transparent);
+        }
+
+        .sidebar-header .sun-icon {
+            color: var(--secondary-color);
+            margin-right: 12px;
+            font-size: 22px;
+            filter: drop-shadow(0 0 8px rgba(249, 168, 38, 0.5));
+        }
+
+        .sidebar-header h1 {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--sidebar-text);
+            letter-spacing: 0.3px;
+        }
+
+        .nav-items {
+            flex: 1;
+            padding: 16px 8px;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 18px;
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin: 4px 0;
+            border-radius: var(--radius-md);
+        }
+
+        .nav-item:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            transform: translateX(3px);
+        }
+
+        .nav-item.active {
+            background-color: var(--secondary-color);
+            color: var(--sidebar-bg);
+            font-weight: 500;
+            box-shadow: 0 0 15px rgba(249, 168, 38, 0.4);
+        }
+
+        .nav-item i {
+            margin-right: 12px;
+            width: 22px;
+            text-align: center;
+            font-size: 18px;
+        }
+
+        .system-status {
+            padding: 16px 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .status-indicator {
+            width: 10px;
+            height: 10px;
+            background-color: var(--tertiary-color);
+            border-radius: 50%;
+            margin-right: 10px;
+            position: relative;
+            box-shadow: 0 0 6px rgba(29, 185, 84, 0.5);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(29, 185, 84, 0);
+            }
+
+            70% {
+                box-shadow: 0 0 0 6px rgba(29, 185, 84, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(29, 185, 84, 0);
+            }
+        }
+
+        .main-content {
+            flex: 1;
+            margin-left: var(--sidebar-width);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            padding: 20px 24px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: white;
+            background-image: linear-gradient(to right, #ffffff, #f8fbff);
+            box-shadow: var(--shadow-sm);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(249, 168, 38, 0.03) 0%, transparent 70%);
+            z-index: 0;
+        }
+
+        .header h1 {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--text-primary);
+            letter-spacing: 0.2px;
+            position: relative;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .notification-icon {
+            position: relative;
+            margin-right: 24px;
+            cursor: pointer;
+        }
+
+        .notification-icon i {
+            font-size: 20px;
+            color: var(--text-secondary);
+            transition: color 0.2s ease;
+        }
+
+        .notification-icon:hover i {
+            color: var(--secondary-color);
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: -6px;
+            right: -6px;
+            background-color: var(--secondary-color);
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 600;
+            box-shadow: 0 2px 4px rgba(249, 168, 38, 0.3);
+        }
+
+        .avatar {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            cursor: pointer;
+            background-image: linear-gradient(45deg, #f1f1f1, #e0e0e0);
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.2s ease;
+            border: 2px solid white;
+        }
+
+        .avatar:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 0 2px rgba(249, 168, 38, 0.2);
+        }
+
+        .content {
+            padding: 24px;
+        }
+
+        .page-title {
+            margin-bottom: 8px;
+            color: var(--text-primary);
+            font-weight: 600;
+            font-size: 24px;
+            letter-spacing: 0.3px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .page-title::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--gradient-solar);
+            border-radius: 2px;
+        }
+
+        .page-subtitle {
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+            font-size: 14px;
+            letter-spacing: 0.1px;
+        }
+
+        .tab-container {
+            display: flex;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 24px;
+            background-color: white;
+            border-radius: var(--radius-md) var(--radius-md) 0 0;
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+        }
+
+        .tab {
+            padding: 16px 24px;
+            text-align: center;
+            cursor: pointer;
+            flex: 1;
+            background-color: transparent;
+            border: none;
+            transition: all 0.2s ease;
+            color: var(--text-secondary);
+            font-weight: 500;
+            letter-spacing: 0.2px;
+            position: relative;
+        }
+
+        .tab:hover {
+            background-color: var(--hover-bg);
+            color: var(--secondary-color);
+        }
+
+        .tab.active {
+            font-weight: 600;
+            color: var(--secondary-color);
+            background-color: white;
+        }
+
+        .tab.active:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-solar);
+        }
+
+        .solar-bg-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: repeating-linear-gradient(0deg, transparent, transparent 10px, rgba(249, 168, 38, 0.03) 10px, rgba(249, 168, 38, 0.03) 11px);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .filter-section {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 24px;
+            align-items: center;
+            background-color: white;
+            padding: 20px;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .filter-section::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--secondary-color), transparent);
+            opacity: 0.3;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .filter-label {
+            font-size: 13px;
+            color: var(--text-secondary);
+            font-weight: 500;
+            letter-spacing: 0.2px;
+        }
+
+        .dropdown {
+            padding: 12px 16px;
+            min-width: 200px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            background-color: white;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.2s ease;
+            font-weight: 500;
+            color: var(--text-primary);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dropdown::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--gradient-solar);
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        .dropdown:hover {
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 2px rgba(249, 168, 38, 0.15);
+        }
+
+        .dropdown:hover::before {
+            opacity: 1;
+        }
+
+        .dropdown:after {
+            content: "▼";
+            font-size: 10px;
+            color: var(--text-secondary);
+            transition: transform 0.2s ease;
+        }
+
+        .dropdown:hover:after {
+            transform: translateY(2px);
+            color: var(--secondary-color);
+        }
+
+        .button-group {
+            margin-left: auto;
+            display: flex;
+            gap: 12px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn {
+            padding: 12px;
+            min-width: 42px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            background-color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            color: var(--text-secondary);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-solar);
+            opacity: 0;
+            transition: opacity 0.2s ease;
+            z-index: -1;
+        }
+
+        .btn:hover {
+            color: #fff;
+            border-color: transparent;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn:hover::before {
+            opacity: 1;
+        }
+
+        .logs-container {
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            background-color: white;
+            box-shadow: var(--shadow-md);
+            position: relative;
+        }
+
+        .logs-header {
+            padding: 22px;
+            background-color: white;
+            border-bottom: 1px solid var(--border-color);
+            background-image: linear-gradient(to right, #f9fafc, white);
+            position: relative;
+        }
+
+        .logs-header::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 60px;
+            height: 100%;
+            background-image: radial-gradient(circle at right, rgba(249, 168, 38, 0.1), transparent 70%);
+            pointer-events: none;
+        }
+
+        .logs-header h2 {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 6px;
+            letter-spacing: 0.2px;
+            display: flex;
+            align-items: center;
+        }
+
+        .logs-header h2 .icon {
+            color: var(--secondary-color);
+            margin-right: 10px;
+            filter: drop-shadow(0 0 5px rgba(249, 168, 38, 0.4));
+        }
+
+        .logs-header p {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-left: 26px;
+        }
+
+        .search-container {
+            padding: 16px 20px;
+            display: flex;
+            justify-content: flex-end;
+            border-bottom: 1px solid var(--border-color);
+            background-color: #fafbfd;
+        }
+
+        .search-input {
+            padding: 10px 14px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            width: 250px;
+            display: flex;
+            align-items: center;
+            transition: all 0.2s ease;
+            background-color: white;
+        }
+
+        .search-input:focus-within {
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 3px rgba(249, 168, 38, 0.15);
+        }
+
+        .search-input i {
+            color: var(--text-secondary);
+        }
+
+        .search-input input {
+            border: none;
+            outline: none;
+            width: 100%;
+            margin-left: 8px;
+            font-size: 14px;
+            color: var(--text-primary);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+
+        thead {
+            background-color: #f8fafd;
+        }
+
+        th,
+        td {
+            padding: 16px 20px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            font-weight: 600;
+            color: var(--text-secondary);
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        tbody tr {
+            transition: all 0.15s ease;
+            position: relative;
+        }
+
+        tbody tr:hover {
+            background-color: rgba(249, 168, 38, 0.05);
+        }
+
+        tbody tr td:first-child {
+            position: relative;
+        }
+
+        tbody tr:hover td:first-child::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: var(--gradient-solar);
+        }
+
+        tbody td {
+            color: var(--text-primary);
+            font-size: 14px;
+        }
+
+        .view-btn {
+            display: flex;
+            align-items: center;
+            color: var(--primary-color);
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .view-btn:hover {
+            color: var(--secondary-color);
+            transform: translateX(2px);
+        }
+
+        .view-btn .icon {
+            margin-right: 6px;
+            font-size: 14px;
+        }
+
+        /* Icon styling */
+        .icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .sidebar .icon {
+            width: 22px;
+            text-align: center;
+            margin-right: 12px;
+            font-size: 16px;
+        }
+
+        .notification-icon .icon {
+            font-size: 20px;
+        }
+
+        .btn .icon {
+            font-size: 14px;
+        }
+
+        .view-btn .icon {
+            margin-right: 6px;
+            font-size: 14px;
+        }
+
+        /* Additional styles for new components */
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            background-color: white;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            box-shadow: var(--shadow-md);
+            margin-top: 5px;
+            width: 200px;
+            z-index: 100;
+            display: none;
+            overflow: hidden;
+        }
+
+        .dropdown-item {
+            padding: 10px 16px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .dropdown-item:hover {
+            background-color: var(--hover-bg);
+            color: var(--secondary-color);
+        }
+
+        #systemLogsBody tr td:nth-child(4) {
+            font-weight: 500;
+        }
+
+        #systemLogsBody tr td:nth-child(4):contains("Info") {
+            color: var(--primary-color);
+        }
+
+        #systemLogsBody tr td:nth-child(4):contains("Warning") {
+            color: var(--secondary-color);
+        }
+
+        #systemLogsBody tr td:nth-child(4):contains("Error") {
+            color: #e53935;
+        }
+
+        .solar-tooltip {
+            position: absolute;
+            background: white;
+            border: 1px solid var(--border-color);
+            padding: 8px 12px;
+            border-radius: var(--radius-sm);
+            box-shadow: var(--shadow-md);
+            font-size: 12px;
+            max-width: 200px;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .solar-tooltip.active {
+            opacity: 1;
+        }
+
+        .loading-indicator {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .loading-sun {
+            width: 30px;
+            height: 30px;
+            background: var(--gradient-solar);
+            border-radius: 50%;
+            box-shadow: 0 0 20px rgba(249, 168, 38, 0.5);
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes sunrays {
+            0% {
+                box-shadow: 0 0 0 0 rgba(249, 168, 38, 0);
+            }
+
+            50% {
+                box-shadow: 0 0 25px 5px rgba(249, 168, 38, 0.3);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(249, 168, 38, 0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <span class="icon"><i class="fas fa-sun"></i></span>
+            <h1>JAGRUT solar bot</h1>
+        </div>
+        <div class="nav-items">
+            <a class="nav-item">
+                <span class="icon"><i class="fas fa-chart-bar"></i></span>
+                <span>Dashboard</span>
+            </a>
+            <a class="nav-item">
+                <span class="icon"><i class="fas fa-robot"></i></span>
+                <span>Robot Control</span>
+            </a>
+            <a class="nav-item">
+                <span class="icon"><i class="fas fa-search"></i></span>
+                <span>System Diagnostics</span>
+            </a>
+            <a class="nav-item active">
+                <span class="icon"><i class="fas fa-clipboard-list"></i></span>
+                <span>Reports & Logs</span>
+            </a>
+            <a class="nav-item">
+                <span class="icon"><i class="fas fa-users"></i></span>
+                <span>User Management</span>
+            </a>
+            <a class="nav-item">
+                <span class="icon"><i class="fas fa-headset"></i></span>
+                <span>Support</span>
+            </a>
+        </div>
+        <div class="system-status">
+            <span class="status-indicator"></span>
+            <span>System Online</span>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="header">
+            <h1>Solar Robot Management System</h1>
+            <div class="header-right">
+                <div class="notification-icon">
+                    <span class="icon"><i class="fas fa-bell"></i></span>
+                    <span class="notification-badge">3</span>
+                </div>
+                <div class="avatar"></div>
+            </div>
+        </div>
+
+        <div class="content">
+            <h1 class="page-title">Reports & Logs</h1>
+            <p class="page-subtitle">View and export system reports and activity logs.</p>
+
+            <div class="tab-container">
+                <button class="tab active" data-tab="cleaning">Cleaning Logs</button>
+                <button class="tab" data-tab="maintenance">Maintenance</button>
+                <button class="tab" data-tab="system">System Logs</button>
+            </div>
+
+            <div class="filter-section">
+                <div class="filter-group">
+                    <span class="filter-label">Date Range</span>
+                    <div class="dropdown" id="dateRange">Last 7 Days</div>
+                    <div class="dropdown-menu" id="dateRangeMenu">
+                        <div class="dropdown-item">Today</div>
+                        <div class="dropdown-item">Last 7 Days</div>
+                        <div class="dropdown-item">Last 30 Days</div>
+                        <div class="dropdown-item">Custom Range</div>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <span class="filter-label">Robot</span>
+                    <div class="dropdown" id="robotFilter">All Robots</div>
+                    <div class="dropdown-menu" id="robotFilterMenu">
+                        <div class="dropdown-item">All Robots</div>
+                        <div class="dropdown-item">Alpha (RBT-001)</div>
+                        <div class="dropdown-item">Beta (RBT-002)</div>
+                        <div class="dropdown-item">Gamma (RBT-003)</div>
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <button class="btn" id="filterBtn">
+                        <span class="icon"><i class="fas fa-filter"></i></span>
+                    </button>
+                    <button class="btn" id="exportBtn">
+                        <span class="icon"><i class="fas fa-download"></i></span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Tab Contents -->
+            <div class="tab-content active" id="cleaning-tab">
+                <div class="logs-container">
+                    <div class="logs-header">
+                        <h2><span class="icon"><i class="fas fa-sun"></i></span>Cleaning Activity Logs</h2>
+                        <p>Records of all cleaning operations</p>
+                    </div>
+
+                    <div class="search-container">
+                        <div class="search-input">
+                            <span class="icon"><i class="fas fa-search"></i></span>
+                            <input type="text" placeholder="Search logs..." id="cleaningSearch">
+                        </div>
+                    </div>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Date & Time</th>
+                                <th>Robot</th>
+                                <th>Status</th>
+                                <th>Duration</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cleaningLogsBody">
+                            <tr>
+                                <td>2023-06-11 09:30</td>
+                                <td>Alpha (RBT-001)</td>
+                                <td>Completed</td>
+                                <td>45 min</td>
+                                <td>
+                                    <div class="view-btn">
+                                        <span class="icon"><i class="fas fa-file-alt"></i></span>
+                                        <span>View</span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2023-06-12 09:30</td>
+                                <td>Alpha (RBT-001)</td>
+                                <td>Completed</td>
+                                <td>45 min</td>
+                                <td>
+                                    <div class="view-btn">
+                                        <span class="icon"><i class="fas fa-file-alt"></i></span>
+                                        <span>View</span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2023-06-13 09:30</td>
+                                <td>Alpha (RBT-001)</td>
+                                <td>Completed</td>
+                                <td>45 min</td>
+                                <td>
+                                    <div class="view-btn">
+                                        <span class="icon"><i class="fas fa-file-alt"></i></span>
+                                        <span>View</span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2023-06-14 09:30</td>
+                                <td>Alpha (RBT-001)</td>
+                                <td>Completed</td>
+                                <td>45 min</td>
+                                <td>
+                                    <div class="view-btn">
+                                        <span class="icon"><i class="fas fa-file-alt"></i></span>
+                                        <span>View</span>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="tab-content" id="maintenance-tab">
+                <div class="logs-container">
+                    <div class="logs-header">
+                        <h2><span class="icon"><i class="fas fa-tools"></i></span>Maintenance Records</h2>
+                        <p>History of maintenance and repairs</p>
+                    </div>
+
+                    <div class="search-container">
+                        <div class="search-input">
+                            <span class="icon"><i class="fas fa-search"></i></span>
+                            <input type="text" placeholder="Search maintenance records..." id="maintenanceSearch">
+                        </div>
+                    </div>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Date & Time</th>
+                                <th>Robot</th>
+                                <th>Type</th>
+                                <th>Technician</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="maintenanceLogsBody">
+                            <tr>
+                                <td>2023-06-10 14:20</td>
+                                <td>Alpha (RBT-001)</td>
+                                <td>Routine Check</td>
+                                <td>John Smith</td>
+                                <td>
+                                    <div class="view-btn">
+                                        <span class="icon"><i class="fas fa-file-alt"></i></span>
+                                        <span>View</span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2023-06-05 11:15</td>
+                                <td>Beta (RBT-002)</td>
+                                <td>Brush Replacement</td>
+                                <td>Maria Torres</td>
+                                <td>
+                                    <div class="view-btn">
+                                        <span class="icon"><i class="fas fa-file-alt"></i></span>
+                                        <span>View</span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2023-05-28 09:40</td>
+                                <td>Gamma (RBT-003)</td>
+                                <td>Battery Check</td>
+                                <td>Robert Johnson</td>
+                                <td>
+                                    <div class="view-btn">
+                                        <span class="icon"><i class="fas fa-file-alt"></i></span>
+                                        <span>View</span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2023-05-20 16:30</td>
+                                <td>Alpha (RBT-001)</td>
+                                <td>Sensor Calibration</td>
+                                <td>John Smith</td>
+                                <td>
+                                    <div class="view-btn">
+                                        <span class="icon"><i class="fas fa-file-alt"></i></span>
+                                        <span>View</span>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="tab-content" id="system-tab">
+                <div class="logs-container">
+                    <div class="logs-header">
+                        <h2><span class="icon"><i class="fas fa-server"></i></span>System Logs</h2>
+                        <p>Technical logs and system events</p>
+                    </div>
+
+                    <div class="search-container">
+                        <div class="search-input">
+                            <span class="icon"><i class="fas fa-search"></i></span>
+                            <input type="text" placeholder="Search system logs..." id="systemSearch">
+                        </div>
+                    </div>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Timestamp</th>
+                                <th>Event Type</th>
+                                <th>Component</th>
+                                <th>Severity</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="systemLogsBody">
+                            <tr>
+                                <td>2023-06-14 08:15:22</td>
+                                <td>System Startup</td>
+                                <td>Core Controller</td>
+                                <td>Info</td>
+                                <td>
+                                    <div class="view-btn">
+                                        <span class="icon"><i class="fas fa-file-alt"></i></span>
+                                        <span>Details</span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2023-06-13 17:42:10</td>
+                                <td>Low Battery Warning</td>
+                                <td>Power System</td>
+                                <td>Warning</td>
+                                <td>
+                                    <div class="view-btn">
+                                        <span class="icon"><i class="fas fa-file-alt"></i></span>
+                                        <span>Details</span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2023-06-12 14:33:05</td>
+                                <td>Connection Lost</td>
+                                <td>Communication</td>
+                                <td>Error</td>
+                                <td>
+                                    <div class="view-btn">
+                                        <span class="icon"><i class="fas fa-file-alt"></i></span>
+                                        <span>Details</span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2023-06-12 09:27:18</td>
+                                <td>System Update</td>
+                                <td>Firmware</td>
+                                <td>Info</td>
+                                <td>
+                                    <div class="view-btn">
+                                        <span class="icon"><i class="fas fa-file-alt"></i></span>
+                                        <span>Details</span>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tab switching functionality
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                const tabId = tab.getAttribute('data-tab');
+
+                // Update active tab
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+
+                // Show appropriate content
+                document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+                document.getElementById(`${tabId}-tab`).classList.add('active');
+
+                // Add loading animation
+                showLoading(`${tabId}-tab`);
+            });
+        });
+
+        // Navigation item highlighting
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', () => {
+                document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+                item.classList.add('active');
+                // You would typically navigate to another page here
+            });
+        });
+
+        // Dropdown functionality with enhanced animation
+        document.querySelectorAll('.dropdown').forEach(dropdown => {
+            dropdown.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const id = dropdown.getAttribute('id');
+                const menu = document.getElementById(`${id}Menu`);
+
+                // Close all open dropdowns first
+                document.querySelectorAll('.dropdown-menu').forEach(menu => {
+                    menu.style.display = 'none';
+                });
+
+                // Position and display menu
+                menu.style.display = 'block';
+                menu.style.top = `${dropdown.offsetTop + dropdown.offsetHeight}px`;
+                menu.style.left = `${dropdown.offsetLeft}px`;
+
+                // Add subtle solar animation effect
+                dropdown.style.transition = 'all 0.3s ease';
+                dropdown.style.animation = 'sunrays 1s';
+
+                // Reset animation after it completes
+                setTimeout(() => {
+                    dropdown.style.animation = '';
+                }, 1000);
+            });
+        });
+
+        // Handle dropdown item selection
+        document.querySelectorAll('.dropdown-item').forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const menu = item.closest('.dropdown-menu');
+                const dropdownId = menu.id.replace('Menu', '');
+                const dropdown = document.getElementById(dropdownId);
+
+                // Update dropdown value
+                dropdown.textContent = item.textContent;
+
+                // Close the menu
+                menu.style.display = 'none';
+
+                // Show loading effect on table
+                const currentTab = document.querySelector('.tab-content.active').id;
+                showLoading(currentTab);
+            });
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', () => {
+            document.querySelectorAll('.dropdown-menu').forEach(menu => {
+                menu.style.display = 'none';
+            });
+        });
+
+        // Search functionality
+        const searchInputs = document.querySelectorAll('.search-input input');
+        searchInputs.forEach(input => {
+            input.addEventListener('input', (e) => {
+                const searchTerm = e.target.value.toLowerCase();
+                const currentTab = e.target.id.split('Search')[0];
+                const tableRows = document.querySelectorAll(`#${currentTab}LogsBody tr`);
+
+                tableRows.forEach(row => {
+                    const text = row.textContent.toLowerCase();
+                    if (text.includes(searchTerm)) {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Button actions
+        document.getElementById('filterBtn').addEventListener('click', () => {
+            const currentTab = document.querySelector('.tab-content.active').id;
+            showLoading(currentTab);
+
+            // Simulate filter action with a subtle animation
+            const btn = document.getElementById('filterBtn');
+            btn.style.animation = 'sunrays 1s';
+            setTimeout(() => {
+                btn.style.animation = '';
+            }, 1000);
+        });
+
+        document.getElementById('exportBtn').addEventListener('click', () => {
+            const currentTab = document.querySelector('.tab-content.active').id.split('-')[0];
+
+            // Create tooltip
+            const tooltip = document.createElement('div');
+            tooltip.className = 'solar-tooltip';
+            tooltip.textContent = `Exporting ${currentTab} data...`;
+            tooltip.style.position = 'fixed';
+
+            // Position tooltip next to button
+            const btn = document.getElementById('exportBtn');
+            const rect = btn.getBoundingClientRect();
+            tooltip.style.top = `${rect.top - 30}px`;
+            tooltip.style.left = `${rect.left + (rect.width / 2) - 100}px`;
+
+            // Show and then hide tooltip
+            document.body.appendChild(tooltip);
+            setTimeout(() => tooltip.classList.add('active'), 10);
+
+            setTimeout(() => {
+                tooltip.classList.remove('active');
+                setTimeout(() => tooltip.remove(), 300);
+            }, 2000);
+
+            // Animate button
+            btn.style.animation = 'sunrays 1s';
+            setTimeout(() => {
+                btn.style.animation = '';
+            }, 1000);
+        });
+
+        // Loading effect function
+        function showLoading(containerId) {
+            const container = document.getElementById(containerId);
+            const table = container.querySelector('table');
+
+            // Create loading overlay
+            const loadingOverlay = document.createElement('div');
+            loadingOverlay.className = 'loading-indicator';
+
+            const loadingIcon = document.createElement('div');
+            loadingIcon.className = 'icon';
+            loadingIcon.innerHTML = '<i class="fas fa-sun fa-spin"></i>';
+            loadingIcon.style.fontSize = '30px';
+            loadingIcon.style.color = 'var(--secondary-color)';
+            loadingOverlay.appendChild(loadingIcon);
+
+            // Hide table temporarily and show loading
+            table.style.opacity = '0.3';
+            container.appendChild(loadingOverlay);
+
+            // After "loading", restore table
+            setTimeout(() => {
+                loadingOverlay.remove();
+                table.style.opacity = '1';
+                table.style.transition = 'opacity 0.3s ease';
+            }, 800);
+        }
+
+        // Enhanced page load animation
+        document.addEventListener('DOMContentLoaded', function () {
+            // Create solar animation overlay
+            const solarOverlay = document.createElement('div');
+            solarOverlay.style.position = 'fixed';
+            solarOverlay.style.top = '0';
+            solarOverlay.style.left = '0';
+            solarOverlay.style.width = '100%';
+            solarOverlay.style.height = '100%';
+            solarOverlay.style.backgroundColor = '#0a2540';
+            solarOverlay.style.zIndex = '9999';
+            solarOverlay.style.opacity = '1';
+            solarOverlay.style.transition = 'opacity 0.6s ease';
+
+            // Add sun element in the center
+            const sunElement = document.createElement('div');
+            sunElement.style.position = 'absolute';
+            sunElement.style.top = '50%';
+            sunElement.style.left = '50%';
+            sunElement.style.transform = 'translate(-50%, -50%)';
+            sunElement.style.width = '60px';
+            sunElement.style.height = '60px';
+            sunElement.style.borderRadius = '50%';
+            sunElement.style.background = 'var(--gradient-solar)';
+            sunElement.style.boxShadow = '0 0 40px 10px rgba(249, 168, 38, 0.4)';
+            sunElement.style.opacity = '0';
+            sunElement.style.animation = 'sunrays 1.5s forwards';
+
+            solarOverlay.appendChild(sunElement);
+            document.body.appendChild(solarOverlay);
+
+            // Fade out overlay after animation
+            setTimeout(function () {
+                sunElement.style.transform = 'translate(-50%, -50%) scale(1.5)';
+                sunElement.style.opacity = '0.9';
+                sunElement.style.transition = 'all 0.5s ease';
+
+                setTimeout(function () {
+                    solarOverlay.style.opacity = '0';
+
+                    setTimeout(function () {
+                        solarOverlay.remove();
+                    }, 600);
+
+                }, 800);
+            }, 400);
+
+            // Initialize page content with opacity transition
+            document.body.style.opacity = '0';
+            setTimeout(function () {
+                document.body.style.transition = 'opacity 0.4s ease';
+                document.body.style.opacity = '1';
+            }, 1800);
+        });
+
+        // Initialize tooltips for view buttons
+        document.querySelectorAll('.view-btn').forEach(btn => {
+            btn.addEventListener('mouseenter', (e) => {
+                const tooltip = document.createElement('div');
+                tooltip.className = 'solar-tooltip';
+                tooltip.textContent = 'View detailed information';
+                tooltip.style.position = 'fixed';
+
+                const rect = btn.getBoundingClientRect();
+                tooltip.style.top = `${rect.top - 30}px`;
+                tooltip.style.left = `${rect.left + (rect.width / 2) - 100}px`;
+
+                document.body.appendChild(tooltip);
+                setTimeout(() => tooltip.classList.add('active'), 10);
+
+                btn.addEventListener('mouseleave', () => {
+                    tooltip.classList.remove('active');
+                    setTimeout(() => tooltip.remove(), 300);
+                }, { once: true });
+            });
+        });
+    </script>
+</body>
+
+</html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solar Robot Management System</title>
+    <!-- Add Font Awesome for professional icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2d72d9;
+            --primary-dark: #1a56b0;
+            --primary-light: #b8d9ff;
+            --secondary-color: #f9a826;
+            --tertiary-color: #1db954;
+            --sidebar-width: 240px;
+            --sidebar-bg: #0a2540;
+            --sidebar-text: #e0e9f5;
+            --border-color: #e6e9ed;
+            --hover-bg: rgba(249, 168, 38, 0.12);
+            --active-bg: rgba(249, 168, 38, 0.18);
+            --text-primary: #273240;
+            --text-secondary: #5d6b82;
+            --shadow-sm: 0 2px 8px rgba(10, 37, 64, 0.05);
+            --shadow-md: 0 4px 12px rgba(10, 37, 64, 0.08);
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --gradient-solar: linear-gradient(135deg, #f9a826 0%, #f7d358 100%);
+            --gradient-header: linear-gradient(90deg, #0a2540 0%, #1a56b0 100%);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', 'Roboto', 'Inter', sans-serif;
+        }
+
+        body {
+            display: flex;
+            min-height: 100vh;
+            background-color: #f2f5fc;
+            color: var(--text-primary);
+            background-image:
+                radial-gradient(circle at 20% 20%, rgba(249, 168, 38, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(45, 114, 217, 0.03) 0%, transparent 50%);
+        }
+
+        .sidebar {
+            width: var(--sidebar-width);
+            background-color: var(--sidebar-bg);
+            border-right: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            height: 100vh;
+            box-shadow: var(--shadow-md);
+            z-index: 10;
+            color: var(--sidebar-text);
+        }
+
+        .sidebar-header {
+            padding: 24px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            background: linear-gradient(to right, rgba(255, 255, 255, 0.05), transparent);
+        }
+
+        .sidebar-header .sun-icon {
+            color: var(--secondary-color);
+            margin-right: 12px;
+            font-size: 22px;
+            filter: drop-shadow(0 0 8px rgba(249, 168, 38, 0.5));
+        }
+
+        .sidebar-header h1 {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--sidebar-text);
+            letter-spacing: 0.3px;
+        }
+
+        .nav-items {
+            flex: 1;
+            padding: 16px 8px;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 18px;
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin: 4px 0;
+            border-radius: var(--radius-md);
+        }
+
+        .nav-item:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            transform: translateX(3px);
+        }
+
+        .nav-item.active {
+            background-color: var(--secondary-color);
+            color: var(--sidebar-bg);
+            font-weight: 500;
+            box-shadow: 0 0 15px rgba(249, 168, 38, 0.4);
+        }
+
+        .nav-item i {
+            margin-right: 12px;
+            width: 22px;
+            text-align: center;
+            font-size: 18px;
+        }
+
+        .system-status {
+            padding: 16px 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .status-indicator {
+            width: 10px;
+            height: 10px;
+            background-color: var(--tertiary-color);
+            border-radius: 50%;
+            margin-right: 10px;
+            position: relative;
+            box-shadow: 0 0 6px rgba(29, 185, 84, 0.5);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(29, 185, 84, 0);
+            }
+
+            70% {
+                box-shadow: 0 0 0 6px rgba(29, 185, 84, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(29, 185, 84, 0);
+            }
+        }
+
+        .main-content {
+            flex: 1;
+            margin-left: var(--sidebar-width);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            padding: 20px 24px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: white;
+            background-image: linear-gradient(to right, #ffffff, #f8fbff);
+            box-shadow: var(--shadow-sm);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(249, 168, 38, 0.03) 0%, transparent 70%);
+            z-index: 0;
+        }
+
+        .header h1 {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--text-primary);
+            letter-spacing: 0.2px;
+            position: relative;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .notification-icon {
+            position: relative;
+            margin-right: 24px;
+            cursor: pointer;
+        }
+
+        .notification-icon i {
+            font-size: 20px;
+            color: var(--text-secondary);
+            transition: color 0.2s ease;
+        }
+
+        .notification-icon:hover i {
+            color: var(--secondary-color);
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: -6px;
+            right: -6px;
+            background-color: var(--secondary-color);
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 600;
+            box-shadow: 0 2px 4px rgba(249, 168, 38, 0.3);
+        }
+
+        .avatar {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            cursor: pointer;
+            background-image: linear-gradient(45deg, #f1f1f1, #e0e0e0);
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.2s ease;
+            border: 2px solid white;
+        }
+
+        .avatar:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 0 2px rgba(249, 168, 38, 0.2);
+        }
+
+        .content {
+            padding: 24px;
+        }
+
+        .page-title {
+            margin-bottom: 8px;
+            color: var(--text-primary);
+            font-weight: 600;
+            font-size: 24px;
+            letter-spacing: 0.3px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .page-title::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--gradient-solar);
+            border-radius: 2px;
+        }
+
+        .page-subtitle {
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+            font-size: 14px;
+            letter-spacing: 0.1px;
+        }
+
+        .tab-container {
+            display: flex;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 24px;
+            background-color: white;
+            border-radius: var(--radius-md) var(--radius-md) 0 0;
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+        }
+
+        .tab {
+            padding: 16px 24px;
+            text-align: center;
+            cursor: pointer;
+            flex: 1;
+            background-color: transparent;
+            border: none;
+            transition: all 0.2s ease;
+            color: var(--text-secondary);
+            font-weight: 500;
+            letter-spacing: 0.2px;
+            position: relative;
+        }
+
+        .tab:hover {
+            background-color: var(--hover-bg);
+            color: var(--secondary-color);
+        }
+
+        .tab.active {
+            font-weight: 600;
+            color: var(--secondary-color);
+            background-color: white;
+        }
+
+        .tab.active:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-solar);
+        }
+
+        .solar-bg-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: repeating-linear-gradient(0deg, transparent, transparent 10px, rgba(249, 168, 38, 0.03) 10px, rgba(249, 168, 38, 0.03) 11px);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .filter-section {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 24px;
+            align-items: center;
+            background-color: white;
+            padding: 20px;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .filter-section::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--secondary-color), transparent);
+            opacity: 0.3;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .filter-label {
+            font-size: 13px;
+            color: var(--text-secondary);
+            font-weight: 500;
+            letter-spacing: 0.2px;
+        }
+
+        .dropdown {
+            padding: 12px 16px;
+            min-width: 200px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            background-color: white;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.2s ease;
+            font-weight: 500;
+            color: var(--text-primary);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dropdown::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--gradient-solar);
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        .dropdown:hover {
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 2px rgba(249, 168, 38, 0.15);
+        }
+
+        .dropdown:hover::before {
+            opacity: 1;
+        }
+
+        .dropdown:after {
+            content: "▼";
+            font-size: 10px;
+            color: var(--text-secondary);
+            transition: transform 0.2s ease;
+        }
+
+        .dropdown:hover:after {
+            transform: translateY(2px);
+            color: var(--secondary-color);
+        }
+
+        .button-group {
+            margin-left: auto;
+            display: flex;
+            gap: 12px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn {
+            padding: 12px;
+            min-width: 42px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            background-color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            color: var(--text-secondary);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-solar);
+            opacity: 0;
+            transition: opacity 0.2s ease;
+            z-index: -1;
+        }
+
+        .btn:hover {
+            color: #fff;
+            border-color: transparent;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn:hover::before {
+            opacity: 1;
+        }
+
+        .logs-container {
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            background-color: white;
+            box-shadow: var(--shadow-md);
+            position: relative;
+        }
+
+        .logs-header {
+            padding: 22px;
+            background-color: white;
+            border-bottom: 1px solid var(--border-color);
+            background-image: linear-gradient(to right, #f9fafc, white);
+            position: relative;
+        }
+
+        .logs-header::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 60px;
+            height: 100%;
+            background-image: radial-gradient(circle at right, rgba(249, 168, 38, 0.1), transparent 70%);
+            pointer-events: none;
+        }
+
+        .logs-header h2 {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 6px;
+            letter-spacing: 0.2px;
+            display: flex;
+            align-items: center;
+        }
+
+        .logs-header h2 .icon {
+            color: var(--secondary-color);
+            margin-right: 10px;
+            filter: drop-shadow(0 0 5px rgba(249, 168, 38, 0.4));
+        }
+
+        .logs-header p {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-left: 26px;
+        }
+
+        .search-container {
+            padding: 16px 20px;
+            display: flex;
+            justify-content: flex-end;
+            border-bottom: 1px solid var(--border-color);
+            background-color: #fafbfd;
+        }
+
+        .search-input {
+            padding: 10px 14px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            width: 250px;
+            display: flex;
+            align-items: center;
+            transition: all 0.2s ease;
+            background-color: white;
+        }
+
+        .search-input:focus-within {
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 3px rgba(249, 168, 38, 0.15);
+        }
+
+        .search-input i {
+            color: var(--text-secondary);
+        }
+
+        .search-input input {
+            border: none;
+            outline: none;
+            width: 100%;
+            margin-left: 8px;
+            font-size: 14px;
+            color: var(--text-primary);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+
+        thead {
+            background-color: #f8fafd;
+        }
+
+        th,
+        td {
+            padding: 16px 20px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            font-weight: 600;
+            color: var(--text-secondary);
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        tbody tr {
+            transition: all 0.15s ease;
+            position: relative;
+        }
+
+        tbody tr:hover {
+            background-color: rgba(249, 168, 38, 0.05);
+        }
+
+        tbody tr td:first-child {
+            position: relative;
+        }
+
+        tbody tr:hover td:first-child::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: var(--gradient-solar);
+        }
+
+        tbody td {
+            color: var(--text-primary);
+            font-size: 14px;
+        }
+
+        .view-btn {
+            display: flex;
+            align-items: center;
+            color: var(--primary-color);
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .view-btn:hover {
+            color: var(--secondary-color);
+            transform: translateX(2px);
+        }
+
+        .view-btn .icon {
+            margin-right: 6px;
+            font-size: 14px;
+        }
+
+        /* Icon styling */
+        .icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .sidebar .icon {
+            width: 22px;
+            text-align: center;
+            margin-right: 12px;
+            font-size: 16px;
+        }
+
+        .notification-icon .icon {
+            font-size: 20px;
+        }
+
+        .btn .icon {
+            font-size: 14px;
+        }
+
+        .view-btn .icon {
+            margin-right: 6px;
+            font-size: 14px;
+        }
+
+        /* Additional styles for new components */
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            background-color: white;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            box-shadow: var(--shadow-md);
+            margin-top: 5px;
+            width: 200px;
+            z-index: 100;
+            display: none;
+            overflow: hidden;
+        }
+
+        .dropdown-item {
+            padding: 10px 16px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .dropdown-item:hover {
+            background-color: var(--hover-bg);
+            color: var(--secondary-color);
+        }
+
+        #systemLogsBody tr td:nth-child(4) {
+            font-weight: 500;
+        }
+
+        #systemLogsBody tr td:nth-child(4):contains("Info") {
+            color: var(--primary-color);
+        }
+
+        #systemLogsBody tr td:nth-child(4):contains("Warning") {
+            color: var(--secondary-color);
+        }
+
+        #systemLogsBody tr td:nth-child(4):contains("Error") {
+            color: #e53935;
+        }
+
+        .solar-tooltip {
+            position: absolute;
+            background: white;
+            border: 1px solid var(--border-color);
+            padding: 8px 12px;
+            border-radius: var(--radius-sm);
+            box-shadow: var(--shadow-md);
+            font-size: 12px;
+            max-width: 200px;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .solar-tooltip.active {
+            opacity: 1;
+        }
+
+        .loading-indicator {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .loading-sun {
+            width: 30px;
+            height: 30px;
+            background: var(--gradient-solar);
+            border-radius: 50%;
+            box-shadow: 0 0 20px rgba(249, 168, 38, 0.5);
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes sunrays {
+            0% {
+                box-shadow: 0 0 0 0 rgba(249, 168, 38, 0);
+            }
+
+            50% {
+                box-shadow: 0 0 25px 5px rgba(249, 168, 38, 0.3);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(249, 168, 38, 0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <span class="icon"><i class="fas fa-sun"></i></span>
+            <h1>JAGRUT solar bot</h1>
+        </div>
+        <div class="nav-items">
+            <a class="nav-item">
+                <span class="icon"><i class="fas fa-chart-bar"></i></span>
+                <span>Dashboard</span>
+            </a>
+            <a class="nav-item">
+                <span class="icon"><i class="fas fa-robot"></i></span>
+                <span>Robot Control</span>
+            </a>
+            <a class="nav-item">
+                <span class="icon"><i class="fas fa-search"></i></span>
+                <span>System Diagnostics</span>
+            </a>
+            <a class="nav-item active">
+                <span class="icon"><i class="fas fa-clipboard-list"></i></span>
+                <span>Reports & Logs</span>
+            </a>
+            <a class="nav-item">
+                <span class="icon"><i class="fas fa-users"></i></span>
+                <span>User Management</span>
+            </a>
+            <a class="nav-item">
+                <span class="icon"><i class="fas fa-headset"></i></span>
+                <span>Support</span>
+            </a>
+        </div>
+        <div class="system-status">
+            <span class="status-indicator"></span>
+            <span>System Online</span>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="header">
+            <h1>Solar Robot Management System</h1>
+            <div class="header-right">
+                <div class="notification-icon">
+                    <span class="icon"><i class="fas fa-bell"></i></span>
+                    <span class="notification-badge">3</span>
+                </div>
+                <div class="avatar"></div>
+            </div>
+        </div>
+
+        <div class="content">
+            <h1 class="page-title">Reports & Logs</h1>
+            <p class="page-subtitle">View and export system reports and activity logs.</p>
+
+            <div class="tab-container">
+                <button class="tab active" data-tab="cleaning">Cleaning Logs</button>
+                <button class="tab" data-tab="maintenance">Maintenance</button>
+                <button class="tab" data-tab="system">System Logs</button>
+            </div>
+
+            <div class="filter-section">
+                <div class="filter-group">
+                    <span class="filter-label">Date Range</span>
+                    <div class="dropdown" id="dateRange">Last 7 Days</div>
+                    <div class="dropdown-menu" id="dateRangeMenu">
+                        <div class="dropdown-item">Today</div>
+                        <div class="dropdown-item">Last 7 Days</div>
+                        <div class="dropdown-item">Last 30 Days</div>
+                        <div class="dropdown-item">Custom Range</div>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <span class="filter-label">Robot</span>
+                    <div class="dropdown" id="robotFilter">All Robots</div>
+                    <div class="dropdown-menu" id="robotFilterMenu">
+                        <div class="dropdown-item">All Robots</div>
+                        <div class="dropdown-item">Alpha (RBT-001)</div>
+                        <div class="dropdown-item">Beta (RBT-002)</div>
+                        <div class="dropdown-item">Gamma (RBT-003)</div>
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <button class="btn" id="filterBtn">
+                        <span class="icon"><i class="fas fa-filter"></i></span>
+                    </button>
+                    <button class="btn" id="exportBtn">
+                        <span class="icon"><i class="fas fa-download"></i></span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Tab Contents -->
+            <div class="tab-content active" id="cleaning-tab">
+                <div class="logs-container">
+                    <div class="logs-header">
+                        <h2><span class="icon"><i class="fas fa-sun"></i></span>Cleaning Activity Logs</h2>
+                        <p>Records of all cleaning operations</p>
+                    </div>
+
+                    <div class="search-container">
+                        <div class="search-input">
+                            <span class="icon"><i class="fas fa-search"></i></span>
+                            <input type="text" placeholder="Search logs..." id="cleaningSearch">
+                        </div>
+                    </div>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Date & Time</th>
+                                <th>Robot</th>
+                                <th>Status</th>
+                                <th>Duration</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cleaningLogsBody">
+                            <tr>
+                                <td>2023-06-11 09:30</td>
+                                <td>Alpha (RBT-001)</td>
+                                <td>Completed</td>
+                                <td>45 min</td>
+                                <td>
+                                    <div class="view-btn">
+                                        <span class="icon"><i class="fas fa-file-alt"></i></span>
+                                        <span>View</span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2023-06-12 09:30</td>
+                                <td>Alpha (RBT-001)</td>
+                                <td>Completed</td>
+                                <td>45 min</td>
+                                <td>
+                                    <div class="view-btn">
+                                        <span class="icon"><i class="fas fa-file-alt"></i></span>
+                                        <span>View</span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2023-06-13 09:30</td>
+                                <td>Alpha (RBT-001)</td>
+                                <td>Completed</td>
+                                <td>45 min</td>
+                                <td>
+                                    <div class="view-btn">
+                                        <span class="icon"><i class="fas fa-file-alt"></i></span>
+                                        <span>View</span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2023-06-14 09:30</td>
+                                <td>Alpha (RBT-001)</td>
+                                <td>Completed</td>
+                                <td>45 min</td>
+                                <td>
+                                    <div class="view-btn">
+                                        <span class="icon"><i class="fas fa-file-alt"></i></span>
+                                        <span>View</span>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="tab-content" id="maintenance-tab">
+                <div class="logs-container">
+                    <div class="logs-header">
+                        <h2><span class="icon"><i class="fas fa-tools"></i></span>Maintenance Records</h2>
+                        <p>History of maintenance and repairs</p>
+                    </div>
+
+                    <div class="search-container">
+                        <div class="search-input">
+                            <span class="icon"><i class="fas fa-search"></i></span>
+                            <input type="text" placeholder="Search maintenance records..." id="maintenanceSearch">
+                        </div>
+                    </div>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Date & Time</th>
+                                <th>Robot</th>
+                                <th>Type</th>
+                                <th>Technician</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="maintenanceLogsBody">
+                            <tr>
+                                <td>2023-06-10 14:20</td>
+                                <td>Alpha (RBT-001)</td>
+                                <td>Routine Check</td>
+                                <td>John Smith</td>
+                                <td>
+                                    <div class="view-btn">
+                                        <span class="icon"><i class="fas fa-file-alt"></i></span>
+                                        <span>View</span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2023-06-05 11:15</td>
+                                <td>Beta (RBT-002)</td>
+                                <td>Brush Replacement</td>
+                                <td>Maria Torres</td>
+                                <td>
+                                    <div class="view-btn">
+                                        <span class="icon"><i class="fas fa-file-alt"></i></span>
+                                        <span>View</span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2023-05-28 09:40</td>
+                                <td>Gamma (RBT-003)</td>
+                                <td>Battery Check</td>
+                                <td>Robert Johnson</td>
+                                <td>
+                                    <div class="view-btn">
+                                        <span class="icon"><i class="fas fa-file-alt"></i></span>
+                                        <span>View</span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2023-05-20 16:30</td>
+                                <td>Alpha (RBT-001)</td>
+                                <td>Sensor Calibration</td>
+                                <td>John Smith</td>
+                                <td>
+                                    <div class="view-btn">
+                                        <span class="icon"><i class="fas fa-file-alt"></i></span>
+                                        <span>View</span>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="tab-content" id="system-tab">
+                <div class="logs-container">
+                    <div class="logs-header">
+                        <h2><span class="icon"><i class="fas fa-server"></i></span>System Logs</h2>
+                        <p>Technical logs and system events</p>
+                    </div>
+
+                    <div class="search-container">
+                        <div class="search-input">
+                            <span class="icon"><i class="fas fa-search"></i></span>
+                            <input type="text" placeholder="Search system logs..." id="systemSearch">
+                        </div>
+                    </div>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Timestamp</th>
+                                <th>Event Type</th>
+                                <th>Component</th>
+                                <th>Severity</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="systemLogsBody">
+                            <tr>
+                                <td>2023-06-14 08:15:22</td>
+                                <td>System Startup</td>
+                                <td>Core Controller</td>
+                                <td>Info</td>
+                                <td>
+                                    <div class="view-btn">
+                                        <span class="icon"><i class="fas fa-file-alt"></i></span>
+                                        <span>Details</span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2023-06-13 17:42:10</td>
+                                <td>Low Battery Warning</td>
+                                <td>Power System</td>
+                                <td>Warning</td>
+                                <td>
+                                    <div class="view-btn">
+                                        <span class="icon"><i class="fas fa-file-alt"></i></span>
+                                        <span>Details</span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2023-06-12 14:33:05</td>
+                                <td>Connection Lost</td>
+                                <td>Communication</td>
+                                <td>Error</td>
+                                <td>
+                                    <div class="view-btn">
+                                        <span class="icon"><i class="fas fa-file-alt"></i></span>
+                                        <span>Details</span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2023-06-12 09:27:18</td>
+                                <td>System Update</td>
+                                <td>Firmware</td>
+                                <td>Info</td>
+                                <td>
+                                    <div class="view-btn">
+                                        <span class="icon"><i class="fas fa-file-alt"></i></span>
+                                        <span>Details</span>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tab switching functionality
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                const tabId = tab.getAttribute('data-tab');
+
+                // Update active tab
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+
+                // Show appropriate content
+                document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+                document.getElementById(`${tabId}-tab`).classList.add('active');
+
+                // Add loading animation
+                showLoading(`${tabId}-tab`);
+            });
+        });
+
+        // Navigation item highlighting
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', () => {
+                document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+                item.classList.add('active');
+                // You would typically navigate to another page here
+            });
+        });
+
+        // Dropdown functionality with enhanced animation
+        document.querySelectorAll('.dropdown').forEach(dropdown => {
+            dropdown.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const id = dropdown.getAttribute('id');
+                const menu = document.getElementById(`${id}Menu`);
+
+                // Close all open dropdowns first
+                document.querySelectorAll('.dropdown-menu').forEach(menu => {
+                    menu.style.display = 'none';
+                });
+
+                // Position and display menu
+                menu.style.display = 'block';
+                menu.style.top = `${dropdown.offsetTop + dropdown.offsetHeight}px`;
+                menu.style.left = `${dropdown.offsetLeft}px`;
+
+                // Add subtle solar animation effect
+                dropdown.style.transition = 'all 0.3s ease';
+                dropdown.style.animation = 'sunrays 1s';
+
+                // Reset animation after it completes
+                setTimeout(() => {
+                    dropdown.style.animation = '';
+                }, 1000);
+            });
+        });
+
+        // Handle dropdown item selection
+        document.querySelectorAll('.dropdown-item').forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const menu = item.closest('.dropdown-menu');
+                const dropdownId = menu.id.replace('Menu', '');
+                const dropdown = document.getElementById(dropdownId);
+
+                // Update dropdown value
+                dropdown.textContent = item.textContent;
+
+                // Close the menu
+                menu.style.display = 'none';
+
+                // Show loading effect on table
+                const currentTab = document.querySelector('.tab-content.active').id;
+                showLoading(currentTab);
+            });
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', () => {
+            document.querySelectorAll('.dropdown-menu').forEach(menu => {
+                menu.style.display = 'none';
+            });
+        });
+
+        // Search functionality
+        const searchInputs = document.querySelectorAll('.search-input input');
+        searchInputs.forEach(input => {
+            input.addEventListener('input', (e) => {
+                const searchTerm = e.target.value.toLowerCase();
+                const currentTab = e.target.id.split('Search')[0];
+                const tableRows = document.querySelectorAll(`#${currentTab}LogsBody tr`);
+
+                tableRows.forEach(row => {
+                    const text = row.textContent.toLowerCase();
+                    if (text.includes(searchTerm)) {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Button actions
+        document.getElementById('filterBtn').addEventListener('click', () => {
+            const currentTab = document.querySelector('.tab-content.active').id;
+            showLoading(currentTab);
+
+            // Simulate filter action with a subtle animation
+            const btn = document.getElementById('filterBtn');
+            btn.style.animation = 'sunrays 1s';
+            setTimeout(() => {
+                btn.style.animation = '';
+            }, 1000);
+        });
+
+        document.getElementById('exportBtn').addEventListener('click', () => {
+            const currentTab = document.querySelector('.tab-content.active').id.split('-')[0];
+
+            // Create tooltip
+            const tooltip = document.createElement('div');
+            tooltip.className = 'solar-tooltip';
+            tooltip.textContent = `Exporting ${currentTab} data...`;
+            tooltip.style.position = 'fixed';
+
+            // Position tooltip next to button
+            const btn = document.getElementById('exportBtn');
+            const rect = btn.getBoundingClientRect();
+            tooltip.style.top = `${rect.top - 30}px`;
+            tooltip.style.left = `${rect.left + (rect.width / 2) - 100}px`;
+
+            // Show and then hide tooltip
+            document.body.appendChild(tooltip);
+            setTimeout(() => tooltip.classList.add('active'), 10);
+
+            setTimeout(() => {
+                tooltip.classList.remove('active');
+                setTimeout(() => tooltip.remove(), 300);
+            }, 2000);
+
+            // Animate button
+            btn.style.animation = 'sunrays 1s';
+            setTimeout(() => {
+                btn.style.animation = '';
+            }, 1000);
+        });
+
+        // Loading effect function
+        function showLoading(containerId) {
+            const container = document.getElementById(containerId);
+            const table = container.querySelector('table');
+
+            // Create loading overlay
+            const loadingOverlay = document.createElement('div');
+            loadingOverlay.className = 'loading-indicator';
+
+            const loadingIcon = document.createElement('div');
+            loadingIcon.className = 'icon';
+            loadingIcon.innerHTML = '<i class="fas fa-sun fa-spin"></i>';
+            loadingIcon.style.fontSize = '30px';
+            loadingIcon.style.color = 'var(--secondary-color)';
+            loadingOverlay.appendChild(loadingIcon);
+
+            // Hide table temporarily and show loading
+            table.style.opacity = '0.3';
+            container.appendChild(loadingOverlay);
+
+            // After "loading", restore table
+            setTimeout(() => {
+                loadingOverlay.remove();
+                table.style.opacity = '1';
+                table.style.transition = 'opacity 0.3s ease';
+            }, 800);
+        }
+
+        // Enhanced page load animation
+        document.addEventListener('DOMContentLoaded', function () {
+            // Create solar animation overlay
+            const solarOverlay = document.createElement('div');
+            solarOverlay.style.position = 'fixed';
+            solarOverlay.style.top = '0';
+            solarOverlay.style.left = '0';
+            solarOverlay.style.width = '100%';
+            solarOverlay.style.height = '100%';
+            solarOverlay.style.backgroundColor = '#0a2540';
+            solarOverlay.style.zIndex = '9999';
+            solarOverlay.style.opacity = '1';
+            solarOverlay.style.transition = 'opacity 0.6s ease';
+
+            // Add sun element in the center
+            const sunElement = document.createElement('div');
+            sunElement.style.position = 'absolute';
+            sunElement.style.top = '50%';
+            sunElement.style.left = '50%';
+            sunElement.style.transform = 'translate(-50%, -50%)';
+            sunElement.style.width = '60px';
+            sunElement.style.height = '60px';
+            sunElement.style.borderRadius = '50%';
+            sunElement.style.background = 'var(--gradient-solar)';
+            sunElement.style.boxShadow = '0 0 40px 10px rgba(249, 168, 38, 0.4)';
+            sunElement.style.opacity = '0';
+            sunElement.style.animation = 'sunrays 1.5s forwards';
+
+            solarOverlay.appendChild(sunElement);
+            document.body.appendChild(solarOverlay);
+
+            // Fade out overlay after animation
+            setTimeout(function () {
+                sunElement.style.transform = 'translate(-50%, -50%) scale(1.5)';
+                sunElement.style.opacity = '0.9';
+                sunElement.style.transition = 'all 0.5s ease';
+
+                setTimeout(function () {
+                    solarOverlay.style.opacity = '0';
+
+                    setTimeout(function () {
+                        solarOverlay.remove();
+                    }, 600);
+
+                }, 800);
+            }, 400);
+
+            // Initialize page content with opacity transition
+            document.body.style.opacity = '0';
+            setTimeout(function () {
+                document.body.style.transition = 'opacity 0.4s ease';
+                document.body.style.opacity = '1';
+            }, 1800);
+        });
+
+        // Initialize tooltips for view buttons
+        document.querySelectorAll('.view-btn').forEach(btn => {
+            btn.addEventListener('mouseenter', (e) => {
+                const tooltip = document.createElement('div');
+                tooltip.className = 'solar-tooltip';
+                tooltip.textContent = 'View detailed information';
+                tooltip.style.position = 'fixed';
+
+                const rect = btn.getBoundingClientRect();
+                tooltip.style.top = `${rect.top - 30}px`;
+                tooltip.style.left = `${rect.left + (rect.width / 2) - 100}px`;
+
+                document.body.appendChild(tooltip);
+                setTimeout(() => tooltip.classList.add('active'), 10);
+
+                btn.addEventListener('mouseleave', () => {
+                    tooltip.classList.remove('active');
+                    setTimeout(() => tooltip.remove(), 300);
+                }, { once: true });
+            });
+        });
+    </script>
+</body>
+
+</html>
