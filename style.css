@@ -503,14 +503,17 @@ h2 {
     color: white;
 }
 
+/* Fix tab content display */
 .tab-content {
-    display: none;
+    display: none; /* Hidden by default */
 }
 
-.tab-content.active {
-    display: block;
+.tab-content.active, 
+.tab-content:not(.hidden) {
+    display: block; /* Show when active or not hidden */
 }
 
+/* This remains the same */
 .tab-content.hidden {
     display: none;
 }
