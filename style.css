@@ -505,18 +505,17 @@ h2 {
 
 /* Fix tab content display */
 .tab-content {
-    display: none; /* Hidden by default */
+    display: none !important; /* Hidden by default with !important to override other styles */
 }
 
-.tab-content.active, 
-.tab-content:not(.hidden) {
-    display: block; /* Show when active or not hidden */
+.tab-content.active {
+    display: block !important; /* Show only when active */
 }
 
-/* This remains the same */
-.tab-content.hidden {
-    display: none;
-}
+/* Remove this conflicting rule that was showing non-hidden tabs */
+/* .tab-content:not(.hidden) {
+    display: block;
+} */
 
 .tab-container {
     display: flex;
