@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Robot Control Panel</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar" id="sidebar">
+      <div class="menu">
+        <div class="logo-heading">🔆 <span>JAGRUT Solar Bot</span></div>
+
+        <ul>
+          <li>Dashboard</li>
+          <li class="active">Robot Control</li>
+          <li>System Diagnostics</li>
+          <li>Reports & Logs</li>
+          <li>User Management</li>
+          <li>Support</li>
+        </ul>
+      </div>
+      <div class="status">● System Online</div>
+    </aside>
+
+    <main class="main" id="main">
+      <header>
+        <div class="header-left">
+          <button class="sidebar-toggle" id="sidebarToggle">☰</button>
+          <h3>Solar Robot Management System</h3>
+        </div>
+        
+        <div class="header-right">
+          <div class="profile-container">
+            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face" 
+                 alt="Profile" class="profile-pic" id="profilePic">
+            <div class="profile-dropdown" id="profileDropdown">
+              <div class="dropdown-item" onclick="handleProfileAction('profile')">
+                <span class="dropdown-icon">👤</span>
+                Profile
+              </div>
+              <div class="dropdown-item" onclick="handleProfileAction('settings')">
+                <span class="dropdown-icon">⚙️</span>
+                Settings
+              </div>
+              <div class="dropdown-item logout" onclick="handleProfileAction('logout')">
+                <span class="dropdown-icon">🚪</span>
+                Logout
+              </div>
+            </div>
+          </div>
+          
+          <div class="alerts">
+            <i class="fa-solid fa-bell"></i> <span class="badge">3</span>
+          </div>
+        </div>
+      </header>
+      
+
+      <section class="panel">
+        <div class=" control-panel-heading">
+          <h1>Robot Control Panel</h1>
+          <p>Manage and control your solar panel cleaning robots.</p>
+        </div>
+        <div class="control-panel">
+        <div class="schedule">
+          <h2>
+            Automatic Schedule
+            <!-- Custom toggle switch replacing checkbox -->
+            <label class="toggle-switch">
+              <input type="checkbox" id="auto-schedule-toggle" checked />
+              <span class="slider"></span>
+            </label>
+          </h2>
+          <p>Set up recurring cleaning schedules</p>
+          <div class="tabs">
+            <button class="tab-button active" onclick="showTab('daily', event)">Daily</button>
+            <button class="tab-button" onclick="showTab('weekly', event)">Weekly</button>
+            <button class="tab-button" onclick="showTab('custom', event)">Custom</button>
+          </div>
+
+          <div id="daily" class="tab-content">
+            <label for="daily-time">Cleaning Time</label>
+            <input id="daily-time" type="time" value="06:00" />
+            <label for="daily-robot">Select Robot</label>
+            <select id="daily-robot">
+              <option>All Robots</option>
+              <option>Alpha (RBT-001)</option>
+              <option>Beta (RBT-002)</option>
+              <option>Gamma (RBT-003)</option>
+              <option>Delta (RBT-004)</option>
+            </select>
+            <button class="save">✔ Save Schedule</button>
+          </div>
+
+          <div id="weekly" class="tab-content hidden">
+            <label>Days of Week</label>
+            <div class="days">
+              <button>Mon</button>
+              <button>Tue</button>
+              <button>Wed</button>
+              <button>Thu</button>
+              <button>Fri</button>
+              <button>Sat</button>
+              <button>Sun</button>
+            </div>
+            <label for="weekly-time">Cleaning Time</label>
+            <input id="weekly-time" type="time" value="08:00" />
+            <label for="weekly-robot">Select Robot</label>
+            <select id="weekly-robot">
+              <option>All Robots</option>
+              <option>Alpha (RBT-001)</option>
+              <option>Beta (RBT-002)</option>
+              <option>Gamma (RBT-003)</option>
+              <option>Delta (RBT-004)</option>
+            </select>
+            <button class="save">✔ Save Schedule</button>
+          </div>
+
+          <div id="custom" class="tab-content hidden">
+            <label for="custom-start-date">Start Date</label>
+            <input id="custom-start-date" type="date" />
+
+            <label for="custom-repeat-number">Repeat Every</label>
+            <div class="repeat-every">
+                <input type="number" id="custom-repeat-number" min="1" placeholder="Enter number">
+                <select id="custom-repeat-unit">
+                  <option value="days">Days</option>
+                  <option value="weeks">Weeks</option>
+                  <option value="months">Months</option>
+                </select>
+            </div>
+
+            <label for="custom-time">Cleaning Time</label>
+            <input id="custom-time" type="time" value="07:00" />
+
+            <label for="custom-robot">Select Robot</label>
+            <select id="custom-robot">
+              <option>All Robots</option>
+              <option>Alpha (RBT-001)</option>
+              <option>Beta (RBT-002)</option>
+              <option>Gamma (RBT-003)</option>
+              <option>Delta (RBT-004)</option>
+            </select>
+
+            <button class="save">✔ Save Schedule</button>
+          </div>
+        </div>
+
+        <div class="manual">
+          <h2>Manual Control</h2>
+          <p class="admin-note"><i class="fa-solid fa-lock"></i> This section requires admin verification</p>
+          <label for="manual-robot">Select Robot</label>
+          <select id="manual-robot">
+            <option>Alpha (RBT-001)</option>
+            <option>Beta (RBT-002)</option>
+            <option>Gamma (RBT-003)</option>
+            <option>Delta (RBT-004)</option>
+          </select>
+          <div class="status-row">
+            <span class="status-dot stopped"></span> Stopped
+            <button class="start">▶ Start</button>
+          </div>
+          <label>Battery Level</label>
+          <progress value="78" max="100"></progress> 78%
+          <button class="save"><i class="fa-solid fa-floppy-disk"></i> Save Settings</button>
+        </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Modal Overlay -->
+  <div id="verification-modal" class="modal-overlay">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Admin Verification Required</h3>
+        <button class="close-btn" onclick="closeModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>Please enter your verification code to start the robot.</p>
+        <label for="verification-code">Verification Code</label>
+        <input type="password" id="verification-code" placeholder="Enter code..." />
+        <p class="demo-note">For demo purposes, use code: <strong>123456</strong></p>
+      </div>
+      <div class="modal-footer">
+        <button class="cancel-btn" onclick="closeModal()">Cancel</button>
+        <button class="verify-btn" onclick="verifyCode()">Verify & Start</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Sidebar toggle functionality
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      const main = document.getElementById('main');
+      const toggleBtn = document.getElementById('sidebarToggle');
+      
+      sidebar.classList.toggle('collapsed');
+      main.classList.toggle('sidebar-collapsed');
+      
+      // Change toggle button icon
+      toggleBtn.textContent = sidebar.classList.contains('collapsed') ? '☰' : '✕';
+    }
+
+    // Profile dropdown functionality
+    function toggleProfileDropdown() {
+      const dropdown = document.getElementById('profileDropdown');
+      dropdown.classList.toggle('show');
+    }
+
+    function handleProfileAction(action) {
+      const dropdown = document.getElementById('profileDropdown');
+      dropdown.classList.remove('show');
+      
+      switch(action) {
+        case 'profile':
+          alert('Opening Profile...');
+          break;
+        case 'settings':
+          alert('Opening Settings...');
+          break;
+        case 'logout':
+          if(confirm('Are you sure you want to logout?')) {
+            alert('Logging out...');
+            // Add logout functionality here
+          }
+          break;
+      }
+    }
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function(event) {
+      const profileContainer = document.querySelector('.profile-container');
+      const dropdown = document.getElementById('profileDropdown');
+      
+      if (!profileContainer.contains(event.target)) {
+        dropdown.classList.remove('show');
+      }
+    });
+
+    function showTab(tab, event) {
+      document.querySelectorAll(".tab-content").forEach((el) =>
+        el.classList.add("hidden")
+      );
+      document.getElementById(tab).classList.remove("hidden");
+
+      document.querySelectorAll(".tab-button").forEach((el) =>
+        el.classList.remove("active")
+      );
+      event.target.classList.add("active");
+    }
+
+    // Modal functions
+    function showModal() {
+      document.getElementById('verification-modal').style.display = 'flex';
+      document.body.classList.add('modal-open');
+    }
+
+    function closeModal() {
+      document.getElementById('verification-modal').style.display = 'none';
+      document.body.classList.remove('modal-open');
+      document.getElementById('verification-code').value = '';
+    }
+
+    function verifyCode() {
+      const code = document.getElementById('verification-code').value;
+      const correctCode = '123456';
+      
+      if (code === correctCode) {
+        // Success - start the robot
+        alert('Verification successful! Robot starting...');
+        closeModal();
+        // Here you can add actual robot start functionality
+        updateRobotStatus('running');
+      } else {
+        // Failed verification
+        alert('Invalid verification code. Please try again.');
+        document.getElementById('verification-code').value = '';
+        document.getElementById('verification-code').focus();
+      }
+    }
+
+    function updateRobotStatus(status) {
+      const statusDot = document.querySelector('.status-dot');
+      const statusText = statusDot.nextSibling;
+      const startButton = document.querySelector('.start');
+      
+      if (status === 'running') {
+        statusDot.className = 'status-dot running';
+        statusText.textContent = ' Running';
+        startButton.textContent = '⏸ Stop';
+        startButton.onclick = stopRobot;
+      } else {
+        statusDot.className = 'status-dot stopped';
+        statusText.textContent = ' Stopped';
+        startButton.textContent = '▶ Start';
+        startButton.onclick = showModal;
+      }
+    }
+
+    function stopRobot() {
+      // Stop the robot
+      alert('Robot stopped successfully!');
+      updateRobotStatus('stopped');
+    }
+
+    // Initialize the start button click handler when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+      const startButton = document.querySelector('.start');
+      if (startButton) {
+        startButton.onclick = showModal;
+      }
+      
+      // Sidebar toggle event listener
+      document.getElementById('sidebarToggle').addEventListener('click', toggleSidebar);
+      
+      // Profile pic click event listener
+      document.getElementById('profilePic').addEventListener('click', toggleProfileDropdown);
+      
+      // Allow Enter key to submit verification
+      document.getElementById('verification-code').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+          verifyCode();
+        }
+      });
+
+      // Add click handlers for day selection in weekly tab
+      document.querySelectorAll('.days button').forEach(button => {
+        button.addEventListener('click', function() {
+          this.classList.toggle('selected');
+        });
+      });
+    });
+  </script>
+</body>
+</html>
