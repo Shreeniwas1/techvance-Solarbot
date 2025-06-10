@@ -68,11 +68,14 @@ body {
     overflow-y: auto;
     position: relative !important;
     z-index: 10;
+    background-color: var(--sidebar-bg); /* Add explicit background color */
     color: var(--sidebar-text);
     padding: 20px;
+    display: flex; /* Ensure flexbox is applied */
+    flex-direction: column; /* Stack children vertically */
     justify-content: space-between;
     transition: transform 0.3s ease;
-    float: none !important; /* Prevent floating issues */
+    float: none !important;
     clear: none !important;
     order: -1 !important; /* Ensure sidebar is first in flex layout */
 }
