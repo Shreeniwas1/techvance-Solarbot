@@ -224,7 +224,7 @@ body {
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     display: flex;
     align-items: center;
-    background: linear-gradient(to right, rgba(255, 255, 255, 0.05), transparent);
+    /* background: linear-gradient(to right, rgba(255, 255, 255, 0.05), transparent); */
 }
 
 .sidebar-header .sun-icon {
