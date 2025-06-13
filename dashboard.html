@@ -4,7 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Solar Robot Management System</title>
+  <!-- Add Font Awesome for professional icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="style.css">
 </head>
@@ -48,7 +49,7 @@
       </div>
     </div>
 
-    <main class="main" id="main">
+    <main class="main" style="padding-left: 0%;">
       <header>
         <div class="header-left">
           <button class="sidebar-toggle" id="sidebarToggle">☰</button>
@@ -75,13 +76,160 @@
             </div>
           </div>
 
-          <div class="alerts">
-            <i class="fa-solid fa-bell"></i> <span class="badge">3</span>
+          <div class="notification-icon">
+            <i class="fa-solid fa-bell"></i>
+            <span class="notification-badge">3</span>
           </div>
         </div>
       </header>
+
+      <div class="content">
+        <div class="dashboard-content">
+          <div class="dashboard-header">
+            <h1 class="page-title">Dashboard</h1>
+            <button id="addRobotBtn" class="add-robot-btn"><i class="fas fa-plus"></i> Add Robot</button>
+          </div>
+
+          <div class="stats-section">
+            <div class="stat-card">
+              <h3>Total Energy Saved</h3>
+              <p class="stat-value">1,245 kWh</p>
+              <p class="stat-trend positive"><i class="fas fa-arrow-up"></i> 15.2% from last month</p>
+            </div>
+            <div class="stat-card">
+              <h3>Cleaning Cycles</h3>
+              <p class="stat-value">277</p>
+              <p class="stat-info">All robots combined</p>
+            </div>
+            <div class="stat-card">
+              <h3>Efficiency Gain</h3>
+              <p class="stat-value">21.5%</p>
+              <p class="stat-info">Average after cleaning</p>
+            </div>
+          </div>
+
+          <h2 class="section-title">Robots</h2>
+          <div class="robots-grid">
+            <div class="robot-card active">
+              <div class="robot-header">
+                <h4>Alpha (RBT-001)</h4>
+                <span class="status-badge cleaning">Cleaning</span>
+              </div>
+              <div class="robot-battery">
+                <span>Battery</span>
+                <div class="battery-bar">
+                  <div class="battery-level" style="width: 78%"></div>
+                </div>
+                <span class="battery-percentage">78%</span>
+              </div>
+              <div class="robot-info">
+                <p><i class="fas fa-map-marker-alt"></i> Location: Section A</p>
+                <p><i class="fas fa-tools"></i> Last Maintenance: 2023-04-01</p>
+              </div>
+              <button class="control-btn">Control <i class="fas fa-chevron-right"></i></button>
+            </div>
+
+            <div class="robot-card">
+              <div class="robot-header">
+                <h4>Beta (RBT-002)</h4>
+                <span class="status-badge charging">Charging</span>
+              </div>
+              <div class="robot-battery">
+                <span>Battery</span>
+                <div class="battery-bar">
+                  <div class="battery-level low" style="width: 32%"></div>
+                </div>
+                <span class="battery-percentage">32%</span>
+              </div>
+              <div class="robot-info">
+                <p><i class="fas fa-map-marker-alt"></i> Location: Charging Station</p>
+                <p><i class="fas fa-tools"></i> Last Maintenance: 2023-03-15</p>
+              </div>
+              <button class="control-btn">Control <i class="fas fa-chevron-right"></i></button>
+            </div>
+
+            <div class="robot-card add-robot">
+              <div class="add-robot-content">
+                <div class="add-icon"><i class="fas fa-plus-circle"></i></div>
+                <h4>Add New Robot</h4>
+                <p>Connect a new robot to your system</p>
+                <button class="add-new-robot-btn">Add Robot</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="weather-section">
+            <div class="weather-card">
+              <h4><i class="fas fa-cloud-sun"></i> Weather Conditions</h4>
+              <div class="weather-details">
+                <div class="weather-main">
+                  <span class="weather-temp">28°C</span>
+                  <span class="weather-state">Sunny</span>
+                </div>
+                <div class="weather-info">
+                  <p><i class="fas fa-wind"></i> 8 km/h wind</p>
+                  <p><i class="fas fa-tint"></i> 10% humidity</p>
+                  <p><i class="fas fa-map-marker-alt"></i> San Jose, CA</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </main>
   </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Toggle sidebar
+      const sidebarToggle = document.getElementById('sidebarToggle');
+      const sidebar = document.querySelector('.sidebar');
+      const main = document.querySelector('.main');
+
+      if (sidebarToggle) {
+        sidebarToggle.addEventListener('click', function () {
+          sidebar.classList.toggle('collapsed');
+          main.classList.toggle('sidebar-collapsed');
+        });
+      }
+
+      // Profile dropdown
+      const profilePic = document.getElementById('profilePic');
+      const profileDropdown = document.getElementById('profileDropdown');
+
+      if (profilePic) {
+        profilePic.addEventListener('click', function (e) {
+          e.stopPropagation();
+          profileDropdown.classList.toggle('show');
+        });
+
+        document.addEventListener('click', function () {
+          profileDropdown.classList.remove('show');
+        });
+      }
+
+      // Add Robot button functionality
+      const addRobotBtn = document.getElementById('addRobotBtn');
+      const addNewRobotBtn = document.querySelector('.add-new-robot-btn');
+
+      if (addRobotBtn) {
+        addRobotBtn.addEventListener('click', function () {
+          alert('Add robot functionality will be implemented here.');
+        });
+      }
+
+      if (addNewRobotBtn) {
+        addNewRobotBtn.addEventListener('click', function () {
+          alert('Add robot functionality will be implemented here.');
+        });
+      }
+    });
+
+    function handleProfileAction(action) {
+      alert(`${action} functionality will be implemented here.`);
+    }
+  </script>
+  <script src="script.js"></script>
 </body>
 
 </html>

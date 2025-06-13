@@ -1311,7 +1311,7 @@ tbody td {
 .modal-body input[type="password"]:focus {
     outline: none;
     border-color: #007bff;
-    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+    box-shadow: 0 0 0 3px rgba(249, 168, 38, 0.1);
 }
 
 .demo-note {
@@ -1502,8 +1502,6 @@ tbody td {
         margin-left: 0;
     }
 }
-
-
 
 /* ///////////////////////////////////////////////////////////////////////// */
 
@@ -2300,7 +2298,419 @@ form button {
   cursor: not-allowed;
 }
 
+/* Dashboard Styles */
+.dashboard-content {
+    padding: 0 20px;
+}
 
-/* ////////////end  d */
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
 
-/* done */
+.add-robot-btn {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: var(--radius-md);
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 6px rgba(45, 114, 217, 0.2);
+}
+
+.add-robot-btn:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(45, 114, 217, 0.3);
+}
+
+/* Stats Section */
+.stats-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.stat-card {
+    background-color: white;
+    padding: 20px;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    transition: all 0.3s ease;
+    border: 1px solid var(--border-color);
+    position: relative;
+    overflow: hidden;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+}
+
+.stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--gradient-solar);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.stat-card:hover::before {
+    opacity: 1;
+}
+
+.stat-card h3 {
+    color: var(--text-secondary);
+    font-size: 14px;
+    margin-bottom: 12px;
+    font-weight: 500;
+}
+
+.stat-value {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+}
+
+.stat-trend {
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.stat-trend.positive {
+    color: #22c55e;
+}
+
+.stat-trend.negative {
+    color: #ef4444;
+}
+
+.stat-info {
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+/* Section Title */
+.section-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 30px 0 20px;
+    color: var(--text-primary);
+    position: relative;
+    display: inline-block;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 30px;
+    height: 3px;
+    background: var(--gradient-solar);
+    border-radius: 2px;
+}
+
+/* Robot Cards */
+.robots-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.robot-card {
+    background: white;
+    border-radius: var(--radius-lg);
+    padding: 20px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.robot-card.active {
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 1px rgba(249, 168, 38, 0.2), var(--shadow-sm);
+}
+
+.robot-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+}
+
+.robot-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.robot-header h4 {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0;
+    color: var(--text-primary);
+}
+
+.status-badge {
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.status-badge.cleaning {
+    background-color: rgba(29, 185, 84, 0.15);
+    color: #1db954;
+}
+
+.status-badge.charging {
+    background-color: rgba(249, 168, 38, 0.15);
+    color: var(--secondary-color);
+}
+
+.status-badge.idle {
+    background-color: rgba(107, 114, 128, 0.15);
+    color: #6b7280;
+}
+
+.robot-battery {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.battery-bar {
+    width: 100%;
+    height: 10px;
+    background-color: #e5e7eb;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.battery-level {
+    height: 100%;
+    background: linear-gradient(90deg, #10b981, #34d399);
+    border-radius: 5px;
+}
+
+.battery-level.low {
+    background: linear-gradient(90deg, #facc15, #fcd34d);
+}
+
+.battery-percentage {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    align-self: flex-end;
+}
+
+.robot-info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.robot-info p {
+    font-size: 14px;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+}
+
+.control-btn {
+    margin-top: auto;
+    background-color: transparent;
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+    border-radius: var(--radius-md);
+    padding: 8px 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.control-btn:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+/* Add Robot Card */
+.robot-card.add-robot {
+    background-color: rgba(243, 244, 246, 0.7);
+    border-style: dashed;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    min-height: 230px;
+}
+
+.robot-card.add-robot:hover {
+    background-color: rgba(243, 244, 246, 1);
+}
+
+.add-robot-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    text-align: center;
+}
+
+.add-icon {
+    font-size: 36px;
+    color: #9ca3af;
+}
+
+.add-robot-content h4 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.add-robot-content p {
+    color: var(--text-secondary);
+    font-size: 14px;
+    margin: 0;
+}
+
+.add-new-robot-btn {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: var(--radius-md);
+    padding: 8px 16px;
+    margin-top: 10px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.add-new-robot-btn:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+}
+
+/* Weather Section */
+.weather-section {
+    margin: 30px 0;
+}
+
+.weather-card {
+    background-color: white;
+    padding: 20px;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+    position: relative;
+    overflow: hidden;
+}
+
+.weather-card::before {
+    content: '';
+    position: absolute;
+    top: -50px;
+    right: -50px;
+    width: 150px;
+    height: 150px;
+    background: radial-gradient(circle, rgba(249, 168, 38, 0.05) 0%, transparent 70%);
+    border-radius: 50%;
+}
+
+.weather-card h4 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text-primary);
+    font-size: 18px;
+    font-weight: 600;
+    margin-top: 0;
+    margin-bottom: 16px;
+}
+
+.weather-card i {
+    color: var(--secondary-color);
+}
+
+.weather-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.weather-main {
+    display: flex;
+    flex-direction: column;
+}
+
+.weather-temp {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.weather-state {
+    margin-top: 5px;
+    font-size: 16px;
+    color: var(--text-secondary);
+}
+
+.weather-info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.weather-info p {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .stats-section {
+        grid-template-columns: 1fr;
+    }
+    
+    .robots-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .dashboard-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+}
+
+/* ...existing code... */
