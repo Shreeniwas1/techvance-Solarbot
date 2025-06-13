@@ -549,8 +549,8 @@ header h1, .header h1 {
 
 /* Panel Styles */
 .panel {
-    padding-left: 1rem;
-    padding-right: 1rem;
+    padding: 1rem;
+    background-color: white;
     flex-wrap: wrap;
 }
 
@@ -1541,6 +1541,7 @@ header .badge {
     right: -10px;
 }
 
+
 .support-container h2 {
     margin-bottom: 5px;
 }
@@ -1669,8 +1670,9 @@ form button {
 }
 
 .support-container {
-    padding-left: 1rem;
-    padding-right: 1rem;
+    padding: 1rem;
+
+    background-color: white;
 }
 
 .support-container h2 {
@@ -1705,6 +1707,7 @@ form button {
 
 #srms-robot-select {
   padding: 0.5rem;
+
   border-radius: 6px;
   border: 1px solid #cbd5e1;
 }
@@ -1717,13 +1720,16 @@ form button {
 /* Tabs */
 .srms-tabs {
   display: flex;
-  gap: 1rem;
   margin-bottom: 1.5rem;
+  background-color: #E2E8F0;
+  max-width: fit-content;
+  padding: 3px;
+  border-radius: 5px;
 }
 
 .srms-tab,
 .srms-tab-button {
-  padding: 0.6rem 1.2rem;
+  padding: 0.6rem 6.8rem;
   border: none;
   border-radius: 0.5rem;
   background-color: #e2e8f0;
@@ -1750,7 +1756,8 @@ form button {
   border-radius: 0.75rem;
   padding: 1.5rem;
   max-width: 600px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e2e8f0;        
+  box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.05);
   margin-bottom: 30px;
 }
 
@@ -1909,7 +1916,8 @@ form button {
 /* Main Content */
 .srms-main {
   flex: 1;
-  padding-left: 1rem;
+  padding: 1rem;
+  background-color: white;
 }
 
 .srms-header h1 {
@@ -1928,8 +1936,9 @@ form button {
 
 
 #user-management-container {
-  max-width: 1100px;
-  padding-left: 1rem;
+
+  padding: 1rem;
+  background-color: white;
 }
 
 #um-header {
