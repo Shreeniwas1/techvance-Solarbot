@@ -82,7 +82,16 @@ body {
     flex-direction: column;
     justify-content: space-between;
     box-shadow: 2px 0 8px rgba(0, 0, 0, 0.08);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.3s ease, width 0.3s ease, flex 0.3s ease;
+}
+
+/* Additional sidebar collapsed style */
+.sidebar.collapsed {
+    width: 0 !important;
+    flex: 0 0 0 !important;
+    padding: 0;
+    overflow: hidden;
+    transform: translateX(-100%);
 }
 
 /* Premium Sidebar Enhancements */
@@ -331,6 +340,12 @@ body {
     overflow-y: auto;
     height: 100vh;
     width: calc(100% - var(--sidebar-width)) !important;
+    transition: width 0.3s ease, margin-left 0.3s ease;
+}
+
+.main.sidebar-collapsed {
+    width: 100% !important;
+    margin-left: 0;
 }
 
 /* Adjust header to fit the main content area */
@@ -2725,4 +2740,3 @@ form button {
     }
 }
 
-/* ...existing code... */

@@ -365,17 +365,7 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // Toggle sidebar
-            const sidebarToggle = document.getElementById('sidebarToggle');
-            const sidebar = document.querySelector('.sidebar');
-            const main = document.querySelector('.main');
 
-            if (sidebarToggle) {
-                sidebarToggle.addEventListener('click', function () {
-                    sidebar.classList.toggle('collapsed');
-                    main.classList.toggle('sidebar-collapsed');
-                });
-            }
 
             // Tab switching functionality
             document.querySelectorAll('.tab').forEach(tab => {
