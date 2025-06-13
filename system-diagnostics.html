@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <div class="container">
+  <div class="container">
     <div class="sidebar">
       <div class="sidebar-header">
         <span class="icon"><i class="fas fa-sun"></i></span>
@@ -22,11 +24,11 @@
           <span class="icon"><i class="fas fa-robot"></i></span>
           <span>Robot Control</span>
         </a>
-        <a class="nav-item" href="system-diagnostics.html">
+        <a class="nav-item active" href="system-diagnostics.html">
           <span class="icon"><i class="fas fa-search"></i></span>
           <span>System Diagnostics</span>
         </a>
-        <a class="nav-item active" href="reports.html">
+        <a class="nav-item" href="reports.html">
           <span class="icon"><i class="fas fa-clipboard-list"></i></span>
           <span>Reports & Logs</span>
         </a>
@@ -79,101 +81,102 @@
       </header>
 
 
-      
+
 
       <div class="srms-main">
-      <div class="srms-header">
-        <h1>System Diagnostics</h1>
-        <p>Monitor system health and perform maintenance checks.</p>
-      </div>
-
-      <div class="srms-select-container">
-        <select id="srms-robot-select">
-                <option>Alpha (RBT-001)</option>
-                <option>Beta (RBT-002)</option>
-                <option>Gamma (RBT-003)</option>
-                <option>Delta (RBT-004)</option>
-        </select>
-      </div>
-
-      <!-- Tabs -->
-      <div class="srms-tabs">
-        <button class="srms-tab-button srms-tab-active" data-tab="components">Components</button>
-        <button class="srms-tab-button" data-tab="maintenance">Maintenance</button>
-      </div>
-
-      <!-- Components Section -->
-      <section id="srms-components" class="srms-card">
-        <h2 class="srms-card-title">Battery System</h2>
-        <p class="srms-card-subtitle">Power management and charging</p>
-        <div class="srms-battery-info">
-          <div class="srms-label"><i class="fa-solid fa-battery-empty"></i> Current Battery Level <span class="srms-badge">78%</span></div>
-          <div class="srms-progress-bar">
-            <div class="srms-progress-fill" style="width: 78%;"></div>
-          </div>
-          <div class="srms-label">Charging Efficiency <span class="srms-badge">95%</span></div>
-          <div class="srms-progress-bar">
-            <div class="srms-progress-fill" style="width: 95%;"></div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Maintenance Section -->
-      <section id="srms-maintenance" class="srms-maintenance-card" style="display: none;">
-        <h3 class="srms-card-title">Maintenance Schedule</h3>
-        <p class="srms-card-subtitle">Upcoming and past maintenance activities</p>
-
-        <div class="srms-upcoming-maintenance">
-          <h4 class="srms-subheading">Upcoming Maintenance</h4>
-          <div class="srms-maintenance-item">
-            <div>
-              <strong>Brush Replacement</strong><br/>
-              <span>Robot RBT-001 (Alpha)</span>
-            </div>
-            <span class="srms-badge-time">In 5 days</span>
-          </div>
-          <div class="srms-maintenance-item">
-            <div>
-              <strong>Battery Inspection</strong><br/>
-              <span>Robot RBT-002 (Beta)</span>
-            </div>
-            <span class="srms-badge-time">In 3 weeks</span>
-          </div>
+        <div class="srms-header">
+          <h1>System Diagnostics</h1>
+          <p>Monitor system health and perform maintenance checks.</p>
         </div>
 
-        <div class="srms-history">
-          <h4 class="srms-subheading">Maintenance History</h4>
-          <div class="srms-maintenance-item">
-            <div>
-              <strong>Brush Replacement</strong><br/>
-              <span>Robot RBT-004 (Delta) - 2 weeks ago</span>
-            </div>
-            <span class="srms-icon">🔧</span>
-          </div>
-          <div class="srms-maintenance-item">
-            <div>
-              <strong>Battery Inspection</strong><br/>
-              <span>Robot RBT-003 (Gamma) - 1 month ago</span>
-            </div>
-            <span class="srms-icon">🔧</span>
-          </div>
-          <div class="srms-maintenance-item">
-            <div>
-              <strong>Full System Check</strong><br/>
-              <span>All Robots - 2 months ago</span>
-            </div>
-            <span class="srms-icon">🔧</span>
-          </div>
+        <div class="srms-select-container">
+          <select id="srms-robot-select">
+            <option>Alpha (RBT-001)</option>
+            <option>Beta (RBT-002)</option>
+            <option>Gamma (RBT-003)</option>
+            <option>Delta (RBT-004)</option>
+          </select>
         </div>
 
-        <button class="srms-maintenance-button">Schedule New Maintenance</button>
-      </section>
-    </div>
+        <!-- Tabs -->
+        <div class="srms-tabs">
+          <button class="srms-tab-button srms-tab-active" data-tab="components">Components</button>
+          <button class="srms-tab-button" data-tab="maintenance">Maintenance</button>
+        </div>
+
+        <!-- Components Section -->
+        <section id="srms-components" class="srms-card">
+          <h2 class="srms-card-title">Battery System</h2>
+          <p class="srms-card-subtitle">Power management and charging</p>
+          <div class="srms-battery-info">
+            <div class="srms-label"><i class="fa-solid fa-battery-empty"></i> Current Battery Level <span
+                class="srms-badge">78%</span></div>
+            <div class="srms-progress-bar">
+              <div class="srms-progress-fill" style="width: 78%;"></div>
+            </div>
+            <div class="srms-label">Charging Efficiency <span class="srms-badge">95%</span></div>
+            <div class="srms-progress-bar">
+              <div class="srms-progress-fill" style="width: 95%;"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Maintenance Section -->
+        <section id="srms-maintenance" class="srms-maintenance-card" style="display: none;">
+          <h3 class="srms-card-title">Maintenance Schedule</h3>
+          <p class="srms-card-subtitle">Upcoming and past maintenance activities</p>
+
+          <div class="srms-upcoming-maintenance">
+            <h4 class="srms-subheading">Upcoming Maintenance</h4>
+            <div class="srms-maintenance-item">
+              <div>
+                <strong>Brush Replacement</strong><br />
+                <span>Robot RBT-001 (Alpha)</span>
+              </div>
+              <span class="srms-badge-time">In 5 days</span>
+            </div>
+            <div class="srms-maintenance-item">
+              <div>
+                <strong>Battery Inspection</strong><br />
+                <span>Robot RBT-002 (Beta)</span>
+              </div>
+              <span class="srms-badge-time">In 3 weeks</span>
+            </div>
+          </div>
+
+          <div class="srms-history">
+            <h4 class="srms-subheading">Maintenance History</h4>
+            <div class="srms-maintenance-item">
+              <div>
+                <strong>Brush Replacement</strong><br />
+                <span>Robot RBT-004 (Delta) - 2 weeks ago</span>
+              </div>
+              <span class="srms-icon">🔧</span>
+            </div>
+            <div class="srms-maintenance-item">
+              <div>
+                <strong>Battery Inspection</strong><br />
+                <span>Robot RBT-003 (Gamma) - 1 month ago</span>
+              </div>
+              <span class="srms-icon">🔧</span>
+            </div>
+            <div class="srms-maintenance-item">
+              <div>
+                <strong>Full System Check</strong><br />
+                <span>All Robots - 2 months ago</span>
+              </div>
+              <span class="srms-icon">🔧</span>
+            </div>
+          </div>
+
+          <button class="srms-maintenance-button">Schedule New Maintenance</button>
+        </section>
+      </div>
   </div>
-      </main>
-      </div>
+  </main>
+  </div>
 
-      <script defer>
+  <script defer>
     document.addEventListener("DOMContentLoaded", () => {
       const tabs = document.querySelectorAll(".srms-tab-button");
       const componentsSection = document.getElementById("srms-components");
@@ -198,4 +201,5 @@
     });
   </script>
 </body>
+
 </html>

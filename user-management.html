@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
     integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
+
 <body>
-    <div class="container">
+  <div class="container">
     <div class="sidebar">
       <div class="sidebar-header">
         <span class="icon"><i class="fas fa-sun"></i></span>
@@ -29,11 +31,11 @@
           <span class="icon"><i class="fas fa-search"></i></span>
           <span>System Diagnostics</span>
         </a>
-        <a class="nav-item active" href="reports.html">
+        <a class="nav-item " href="reports.html">
           <span class="icon"><i class="fas fa-clipboard-list"></i></span>
           <span>Reports & Logs</span>
         </a>
-        <a class="nav-item" href="user-management.html">
+        <a class="nav-item active" href="user-management.html">
           <span class="icon"><i class="fas fa-users"></i></span>
           <span>User Management</span>
         </a>
@@ -81,161 +83,168 @@
         </div>
       </header>
 
-       <div id="user-management-container">
-    <h1 id="um-header">User Management</h1>
-    <p id="um-subtitle">Manage user accounts and permissions.</p>
+      <div id="user-management-container">
+        <h1 id="um-header">User Management</h1>
+        <p id="um-subtitle">Manage user accounts and permissions.</p>
 
-    <div id="um-alert">
-      <strong>Access Restriction:</strong> System access is restricted to Administrator and Manager roles only.
-    </div>
-
-    <div id="um-top-bar">
-      <input type="text" id="um-search" placeholder="Search users..." />
-      <button id="um-add-user-btn" class=" um-btn-primary"><i class="fa-solid fa-user-plus"></i> Add User</button>
-    </div>
-
-    <div id="um-user-accounts" class="um-panel">
-  <h2 class="um-panel-title">User Accounts</h2>
-  <p class="um-panel-subtitle">Manage user accounts and their access levels</p>
-
-  <table class="um-user-table">
-    <thead>
-      <tr>
-        <th>User</th>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Role</th>
-        <th>Status</th>
-        <th>Last Login</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><div class="um-avatar sm">JD</div></td>
-        <td><strong>John Doe</strong></td>
-        <td>john.doe@example.com</td>
-        <td><span class="um-role-badge blue">Admin</span></td>
-        <td><span class="um-status-indicator active"></span> Active</td>
-        <td>2h ago</td>
-        <td>
-          <i class="fa-solid fa-pen-to-square"></i>
-          <i class="fa-solid fa-lock"></i>
-        </td>
-      </tr>
-      <tr>
-        <td><div class="um-avatar sm">JS</div></td>
-        <td><strong>Jane Smith</strong></td>
-        <td>jane.smith@example.com</td>
-        <td><span class="um-role-badge blue">Manager</span></td>
-        <td><span class="um-status-indicator active"></span> Active</td>
-        <td>1d ago</td>
-        <td>
-          <i class="fa-solid fa-pen-to-square"></i>
-          <i class="fa-solid fa-lock"></i>
-        </td>
-      </tr>
-      <tr>
-        <td><div class="um-avatar sm">RJ</div></td>
-        <td><strong>Robert Johnson</strong></td>
-        <td>robert.johnson@example.com</td>
-        <td><span class="um-role-badge gray">Operator</span></td>
-        <td><span class="um-status-indicator active"></span> Active</td>
-        <td>3d ago</td>
-        <td>
-          <i class="fa-solid fa-pen-to-square"></i>
-          <i class="fa-solid fa-lock"></i>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-
-  <div class="um-pagination">
-    <span>Showing 3 of 10 users</span>
-    <div>
-      <button class="um-btn um-btn-disabled">Previous</button>
-      <button class="um-btn">Next</button>
-    </div>
-  </div>
-</div>
-
-
-    <div id="um-bottom-panels">
-  <div id="um-role-management" class="um-panel">
-    <h2 class="um-panel-title">Role Management</h2>
-    <p class="um-panel-subtitle">Configure user roles and permissions</p>
-    <ul class="um-role-list">
-      <li class="um-role-item">
-        <div>
-          <strong>Administrator</strong>
-          <p class="um-role-desc">Full system access and control</p>
+        <div id="um-alert">
+          <strong>Access Restriction:</strong> System access is restricted to Administrator and Manager roles only.
         </div>
-        <span class="um-role-badge full">Full Access</span>
-      </li>
-      <li class="um-role-item">
-        <div>
-          <strong>Manager</strong>
-          <p class="um-role-desc">Can manage robots and view reports</p>
-        </div>
-        <span class="um-role-badge full">Full Access</span>
-      </li>
-      <li class="um-role-item">
-        <div>
-          <strong>Operator</strong>
-          <p class="um-role-desc">Can view diagnostics only</p>
-        </div>
-        <span class="um-role-badge limited">Limited Access</span>
-      </li>
-      <li class="um-role-item">
-        <div>
-          <strong>Viewer</strong>
-          <p class="um-role-desc">Read-only access to dashboard</p>
-        </div>
-        <span class="um-role-badge limited">Limited Access</span>
-      </li>
-    </ul>
-    <button class="um-btn um-btn-outline um-add-role-btn">+ Add New Role</button>
-  </div>
 
-  <div id="um-activity-log" class="um-panel">
-    <h2 class="um-panel-title">Activity Log</h2>
-    <p class="um-panel-subtitle">Recent user activity and system events</p>
-    <ul class="um-activity-list">
-      <li class="um-activity-item">
-        <div class="um-avatar">JD</div>
-        <div>
-          <strong>John Doe</strong> updated robot settings<br />
-          <span class="um-timestamp">2 hours ago</span>
+        <div id="um-top-bar">
+          <input type="text" id="um-search" placeholder="Search users..." />
+          <button id="um-add-user-btn" class=" um-btn-primary"><i class="fa-solid fa-user-plus"></i> Add User</button>
         </div>
-      </li>
-      <li class="um-activity-item">
-        <div class="um-avatar">JS</div>
-        <div>
-          <strong>Jane Smith</strong> scheduled maintenance<br />
-          <span class="um-timestamp">5 hours ago</span>
-        </div>
-      </li>
-      <li class="um-activity-item">
-        <div class="um-avatar">JD</div>
-        <div>
-          <strong>John Doe</strong> added a new robot<br />
-          <span class="um-timestamp">2 days ago</span>
-        </div>
-      </li>
-      <li class="um-activity-item">
-        <div class="um-avatar">JS</div>
-        <div>
-          <strong>Jane Smith</strong> logged in<br />
-          <span class="um-timestamp">5 days ago</span>
-        </div>
-      </li>
-    </ul>
-    <button class="um-btn um-btn-outline um-view-activity-btn">View All Activity</button>
-  </div>
-</div>
 
-  </div>
-      </main>
+        <div id="um-user-accounts" class="um-panel">
+          <h2 class="um-panel-title">User Accounts</h2>
+          <p class="um-panel-subtitle">Manage user accounts and their access levels</p>
+
+          <table class="um-user-table">
+            <thead>
+              <tr>
+                <th>User</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Status</th>
+                <th>Last Login</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <div class="um-avatar sm">JD</div>
+                </td>
+                <td><strong>John Doe</strong></td>
+                <td>john.doe@example.com</td>
+                <td><span class="um-role-badge blue">Admin</span></td>
+                <td><span class="um-status-indicator active"></span> Active</td>
+                <td>2h ago</td>
+                <td>
+                  <i class="fa-solid fa-pen-to-square"></i>
+                  <i class="fa-solid fa-lock"></i>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="um-avatar sm">JS</div>
+                </td>
+                <td><strong>Jane Smith</strong></td>
+                <td>jane.smith@example.com</td>
+                <td><span class="um-role-badge blue">Manager</span></td>
+                <td><span class="um-status-indicator active"></span> Active</td>
+                <td>1d ago</td>
+                <td>
+                  <i class="fa-solid fa-pen-to-square"></i>
+                  <i class="fa-solid fa-lock"></i>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="um-avatar sm">RJ</div>
+                </td>
+                <td><strong>Robert Johnson</strong></td>
+                <td>robert.johnson@example.com</td>
+                <td><span class="um-role-badge gray">Operator</span></td>
+                <td><span class="um-status-indicator active"></span> Active</td>
+                <td>3d ago</td>
+                <td>
+                  <i class="fa-solid fa-pen-to-square"></i>
+                  <i class="fa-solid fa-lock"></i>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="um-pagination">
+            <span>Showing 3 of 10 users</span>
+            <div>
+              <button class="um-btn um-btn-disabled">Previous</button>
+              <button class="um-btn">Next</button>
+            </div>
+          </div>
+        </div>
+
+
+        <div id="um-bottom-panels">
+          <div id="um-role-management" class="um-panel">
+            <h2 class="um-panel-title">Role Management</h2>
+            <p class="um-panel-subtitle">Configure user roles and permissions</p>
+            <ul class="um-role-list">
+              <li class="um-role-item">
+                <div>
+                  <strong>Administrator</strong>
+                  <p class="um-role-desc">Full system access and control</p>
+                </div>
+                <span class="um-role-badge full">Full Access</span>
+              </li>
+              <li class="um-role-item">
+                <div>
+                  <strong>Manager</strong>
+                  <p class="um-role-desc">Can manage robots and view reports</p>
+                </div>
+                <span class="um-role-badge full">Full Access</span>
+              </li>
+              <li class="um-role-item">
+                <div>
+                  <strong>Operator</strong>
+                  <p class="um-role-desc">Can view diagnostics only</p>
+                </div>
+                <span class="um-role-badge limited">Limited Access</span>
+              </li>
+              <li class="um-role-item">
+                <div>
+                  <strong>Viewer</strong>
+                  <p class="um-role-desc">Read-only access to dashboard</p>
+                </div>
+                <span class="um-role-badge limited">Limited Access</span>
+              </li>
+            </ul>
+            <button class="um-btn um-btn-outline um-add-role-btn">+ Add New Role</button>
+          </div>
+
+          <div id="um-activity-log" class="um-panel">
+            <h2 class="um-panel-title">Activity Log</h2>
+            <p class="um-panel-subtitle">Recent user activity and system events</p>
+            <ul class="um-activity-list">
+              <li class="um-activity-item">
+                <div class="um-avatar">JD</div>
+                <div>
+                  <strong>John Doe</strong> updated robot settings<br />
+                  <span class="um-timestamp">2 hours ago</span>
+                </div>
+              </li>
+              <li class="um-activity-item">
+                <div class="um-avatar">JS</div>
+                <div>
+                  <strong>Jane Smith</strong> scheduled maintenance<br />
+                  <span class="um-timestamp">5 hours ago</span>
+                </div>
+              </li>
+              <li class="um-activity-item">
+                <div class="um-avatar">JD</div>
+                <div>
+                  <strong>John Doe</strong> added a new robot<br />
+                  <span class="um-timestamp">2 days ago</span>
+                </div>
+              </li>
+              <li class="um-activity-item">
+                <div class="um-avatar">JS</div>
+                <div>
+                  <strong>Jane Smith</strong> logged in<br />
+                  <span class="um-timestamp">5 days ago</span>
+                </div>
+              </li>
+            </ul>
+            <button class="um-btn um-btn-outline um-view-activity-btn">View All Activity</button>
+          </div>
+        </div>
+
       </div>
+    </main>
+  </div>
 </body>
+
 </html>
