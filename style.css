@@ -220,7 +220,8 @@ body {
 }
 
 .sidebar-header {
-    padding: 11px 12px;
+    padding: 11px 0px;
+    padding-bottom: 24px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     display: flex;
     align-items: center;
@@ -235,7 +236,7 @@ body {
 }
 
 .sidebar-header h1 {
-    font-size: 90%;
+    font-size: 110%;
     font-weight: 950;
     color: var(--sidebar-text);
     letter-spacing: 0.3px;
