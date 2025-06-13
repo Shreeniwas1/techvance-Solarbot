@@ -537,7 +537,7 @@ header h1, .header h1 {
     position: absolute;
     bottom: -4px;
     left: 0;
-    width: 40px;
+    width: 100%;  /* Changed from 40px to 100% to span full width */
     height: 3px;
     background: var(--gradient-solar);
     border-radius: 2px;
@@ -628,7 +628,7 @@ h2 {
     background: white;
     border-radius: 8px;
     box-shadow: var(--shadow-sm);
-
+    margin-top: 16px;
 }
 
 .tab-container {
@@ -2432,7 +2432,7 @@ form button {
     position: absolute;
     bottom: -4px;
     left: 0;
-    width: 30px;
+    width: 99%;
     height: 3px;
     background: var(--gradient-solar);
     border-radius: 2px;
