@@ -1,3 +1,6 @@
+/* Google Fonts Import for Noto Sans */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700&display=swap');
+
 /* CSS Variables and Base Styles */
 :root {
     --primary-color: #2d72d9;
@@ -26,7 +29,7 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: 'Segoe UI', 'Roboto', 'Inter', sans-serif;
+    font-family: 'Noto Sans', 'Segoe UI', 'Roboto', 'Inter', sans-serif;
 }
 
 body {
