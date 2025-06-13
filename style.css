@@ -357,7 +357,7 @@ header, .header {
     justify-content: space-between;
     align-items: center;
     background: white;
-    background-image: linear-gradient(to right, #ffffff, #f8fbff);
+
     box-shadow: var(--shadow-sm);
     position: relative;
     border-bottom: 1px solid var(--border-color);
@@ -830,7 +830,7 @@ button.start {
 }
 
 button.start:hover {
-    background-color: #218838;
+    background-color: #30D096;
 }
 
 button.start:active {
@@ -860,7 +860,7 @@ progress[value]::-webkit-progress-bar {
 }
 
 progress[value]::-webkit-progress-value {
-    background-color: #28a745;
+    background-color: #30D096;
     border-radius: 8px;
 }
 
@@ -1809,8 +1809,8 @@ form button {
 }
 
 .srms-badge {
-  background-color: #3b82f6;
-  color: #fff;
+
+  color: black;
   padding: 0.15rem 0.5rem;
   border-radius: 0.3rem;
   margin-left: 0.5rem;
@@ -1837,7 +1837,7 @@ form button {
 
 .srms-progress-fill {
   height: 100%;
-  background-color: #3b82f6;
+  background-color: #30D096;
 }
 
 .srms-percentage {
