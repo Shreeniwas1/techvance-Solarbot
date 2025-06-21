@@ -30,7 +30,7 @@
     margin: 0;
     padding: 0;
     font-family: 'Noto Sans', 'Segoe UI', 'Roboto', 'Inter', sans-serif;
-    color: black;
+    color: var(--primary-dark);
 }
 
 body {
@@ -47,6 +47,10 @@ body {
     height: 100vh !important;
     width: 100% !important;
     overflow: hidden;
+}
+
+.alerts {
+    color: var(--primary-dark);
 }
 
 /* Logo and Heading Styles */
@@ -236,7 +240,7 @@ body {
 .sidebar-header h1 {
     font-size: 110%;
     font-weight: 950;
-    color: black;
+    color: var(--primary-dark);
     letter-spacing: 0.3px;
 }
 
@@ -726,6 +730,8 @@ select {
     background-position: right 10px center;
     background-size: 16px 16px;
     padding-right: 30px;
+
+
 }
 
 /* Day Selection Buttons */
@@ -928,7 +934,7 @@ input:checked + .slider:before {
     border-radius: var(--radius-md);
     box-shadow: var(--shadow-sm);
     position: relative;
-    overflow: hidden;
+    overflow: visible; /* <-- Allow dropdowns to overflow */
 }
 
 .filter-section::after {
@@ -962,7 +968,7 @@ input:checked + .slider:before {
     min-width: 200px;
     border: 1px solid var(--border-color);
     border-radius: var(--radius-sm);
-    background-color: white;
+    background: white;
     cursor: pointer;
     display: flex;
     justify-content: space-between;
@@ -972,6 +978,7 @@ input:checked + .slider:before {
     color: var(--text-primary);
     position: relative;
     overflow: hidden;
+    background: white; /* Use your light purple background */
 }
 
 .dropdown::before {
@@ -981,14 +988,16 @@ input:checked + .slider:before {
     left: 0;
     width: 4px;
     height: 100%;
-    background: var(--gradient-solar);
+    background: var(--gradient-solar); /* Use your gradient */
     opacity: 0;
     transition: opacity 0.2s ease;
 }
 
 .dropdown:hover {
     border-color: var(--secondary-color);
-    box-shadow: 0 0 0 2px rgba(249, 168, 38, 0.15);
+    box-shadow: 0 0 0 2px var(--primary-light);
+    background: var(--primary-color); /* On hover, use your primary color */
+    color: #fff;
 }
 
 .dropdown:hover::before {
@@ -1003,19 +1012,18 @@ input:checked + .slider:before {
 }
 
 .dropdown:hover:after {
-    transform: translateY(2px);
-    color: var(--secondary-color);
+    color: #fff;
 }
 
 .dropdown-menu {
     position: absolute;
-    background-color: white;
+    background: var(--primary-light); /* Match dropdown background */
     border: 1px solid var(--border-color);
     border-radius: var(--radius-sm);
     box-shadow: var(--shadow-md);
     margin-top: 5px;
     width: 200px;
-    z-index: 100;
+    z-index: 9999; /* <-- Make sure dropdown is on top */
     display: none;
     overflow: hidden;
 }
@@ -1024,11 +1032,13 @@ input:checked + .slider:before {
     padding: 10px 16px;
     cursor: pointer;
     transition: all 0.2s ease;
+    color: var(--text-primary);
+    background: white;
 }
 
 .dropdown-item:hover {
-    background-color: var(--hover-bg);
-    color: var(--secondary-color);
+    background: var(--primary-color);
+    color: #fff;
 }
 
 /* Button Group */
@@ -1114,9 +1124,9 @@ input:checked + .slider:before {
     font-weight: 600;
     color: var(--text-primary);
     margin-bottom: 6px;
-    letter-spacing: 0.2px;
     display: flex;
     align-items: center;
+    justify-content: flex-start; /* <-- Add this line to align left */
 }
 
 .logs-header h2 .icon {
