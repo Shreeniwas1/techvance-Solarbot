@@ -1138,7 +1138,7 @@ input:checked + .slider:before {
 .logs-header p {
     font-size: 14px;
     color: var(--text-secondary);
-    margin-left: 26px;
+    margin-left: 10px;
 }
 
 /* Search */
@@ -2743,5 +2743,83 @@ form button {
         align-items: flex-start;
         gap: 10px;
     }
+}
+
+/* Dropdown Styles */
+.dropdown {
+    padding: 12px 16px;
+    min-width: 200px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    background: white;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.2s ease;
+    font-weight: 500;
+    color: var(--text-primary);
+    position: relative;
+    overflow: hidden;
+}
+
+.dropdown::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--gradient-solar); /* Use your gradient */
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.dropdown:hover {
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 2px var(--primary-light);
+    background: var(--primary-color); /* On hover, use your primary color */
+    color: #fff;
+}
+
+.dropdown:hover::before {
+    opacity: 1;
+}
+
+.dropdown:after {
+    content: "▼";
+    font-size: 10px;
+    color: var(--text-secondary);
+    transition: transform 0.2s ease;
+}
+
+.dropdown:hover:after {
+    color: #fff;
+}
+
+.dropdown-menu {
+    position: absolute;
+    background: var(--primary-light); /* Match dropdown background */
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-md);
+    margin-top: 5px;
+    width: 200px;
+    z-index: 9999; /* <-- Make sure dropdown is on top */
+    display: none;
+    overflow: hidden;
+}
+
+.dropdown-item {
+    padding: 10px 16px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: var(--text-primary);
+    background: white;
+}
+
+.dropdown-item:hover {
+    background: var(--primary-color);
+    color: #fff;
 }
 
