@@ -8,7 +8,7 @@
     --primary-light: #DAD7E8;
     --secondary-color: #9688E8;
     --tertiary-color: #363636;
-    --sidebar-width: 240px;
+    --sidebar-width: 280px; /* Increased from 240px to 280px for a wider sidebar */
     --sidebar-bg: #9688E8;
     --sidebar-text: #FFFFFF;
     --border-color: #DAD7E8;
@@ -2230,7 +2230,7 @@ form button {
     right: -50px;
     width: 150px;
     height: 150px;
-    background: radial-gradient(circle, rgba(249, 168, 38, 0.05) 0%, transparent 70%);
+    background: radial-gradient(circle at right, rgba(249, 168, 38, 0.05) 0%, transparent 70%);
     border-radius: 50%;
 }
 
@@ -2742,6 +2742,42 @@ tbody td {
     font-size: 14px;
 }
 
+/* Animations and Effects */
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(29, 185, 84, 0);
+    }
+    70% {
+        box-shadow: 0 0 0 6px rgba(29, 185, 84, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(29, 185, 84, 0);
+    }
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50px) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes sunrays {
+    0% {
+        box-shadow: 0 0 0 0 rgba(249, 168, 38, 0);
+    }
+    50% {
+        box-shadow: 0 0 25px 5px rgba(249, 168, 38, 0.3);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(249, 168, 38, 0);
+    }
+}
+
 /* Modal Open Effect */
 .modal-open .container {
     filter: blur(3px);
@@ -3143,6 +3179,42 @@ tbody td {
     font-size: 14px;
 }
 
+/* Animations and Effects */
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(29, 185, 84, 0);
+    }
+    70% {
+        box-shadow: 0 0 0 6px rgba(29, 185, 84, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(29, 185, 84, 0);
+    }
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50px) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes sunrays {
+    0% {
+        box-shadow: 0 0 0 0 rgba(249, 168, 38, 0);
+    }
+    50% {
+        box-shadow: 0 0 25px 5px rgba(249, 168, 38, 0.3);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(249, 168, 38, 0);
+    }
+}
+
 /* Modal Open Effect */
 .modal-open .container {
     filter: blur(3px);
@@ -3222,78 +3294,6 @@ tbody td {
         margin-left: 0;
     }
 }
-
-/* Logs Section */
-.logs-container {
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    background-color: white;
-    box-shadow: var(--shadow-md);
-    position: relative;
-}
-
-.logs-header {
-    padding: 22px;
-    background-color: white;
-    border-bottom: 1px solid var(--border-color);
-    background-image: linear-gradient(to right, #f9fafc, white);
-    position: relative;
-}
-
-.logs-header::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 60px;
-    height: 100%;
-    background-image: radial-gradient(circle at right, rgba(249, 168, 38, 0.1), transparent 70%);
-    pointer-events: none;
-}
-
-.logs-header h2 {
-    font-size: 18px;
-    font-weight: 600;
-    color: var(--text-primary);
-    margin-bottom: 6px;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start; /* <-- Add this line to align left */
-}
-
-.logs-header h2 .icon {
-    color: var(--secondary-color);
-    margin-right: 10px;
-    filter: drop-shadow(0 0 5px rgba(249, 168, 38, 0.4));
-}
-
-.logs-header p {
-    font-size: 14px;
-    color: var(--text-secondary);
-    margin-left: 10px;
-}
-
-/* Search */
-.search-container {
-    padding: 16px 20px;
-    display: flex;
-    justify-content: flex-end;
-    border-bottom: 1px solid var(--border-color);
-    background-color: #fafbfd;
-}
-
-.search-input {
-    padding: 10px 14px;
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius-sm);
-    width: 250px;
-    display: flex;
-    align-items: center;
-    transition: all 0.2s ease;
-    background-color: #fff;
-}
-
 .search-input:focus-within {
     border-color: var(--secondary-color);
     box-shadow: 0 0 0 3px rgba(249, 168, 38, 0.15);
