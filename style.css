@@ -11,7 +11,7 @@
     --sidebar-width: 280px; /* Increased from 240px to 280px for a wider sidebar */
     --sidebar-bg: #9688E8;
     --sidebar-text: #FFFFFF;
-    --border-color: #DAD7E8;
+    --border-color: #aba8b5;
     --hover-bg: rgba(150, 136, 232, 0.12);
     --active-bg: rgba(150, 136, 232, 0.18);
     --text-primary: #363636;
@@ -23,6 +23,7 @@
     --radius-lg: 12px;
     --gradient-solar: linear-gradient(135deg, #9688E8 0%, #DAD7E8 100%);
     --gradient-header: linear-gradient(90deg, #9688E8 0%, #363636 100%);
+    font-size: 18px; /* Add this line for global scaling (was typically 16px) */
 }
 
 * {
@@ -38,6 +39,7 @@ body {
     background-color: #F7F7F7;
     color: var(--text-primary);
     background-image: none;
+    font-size: 1.1rem; /* Increase from default (was 1rem) */
 }
 
 /* Container Layout - Adding !important to ensure these styles take priority */
@@ -226,6 +228,7 @@ body {
     align-items: center;
     background: linear-gradient(135deg, #f8fafc 0%, white 100%);
     position: relative;
+    height: 5rem;
 }
 
 /* style the wrapper around the sun icon */
@@ -271,7 +274,7 @@ body {
     margin: 4px 16px;
     border-radius: 16px;
     font-weight: 500;
-    font-size: 14px;
+    font-size: 1rem;
     position: relative;
     overflow: hidden;
 }
@@ -352,7 +355,7 @@ body {
     border-top: 1px solid var(--border-color);
     display: flex;
     align-items: center;
-    font-size: 13px;
+    font-size: 1rem;
     color: var(--text-secondary);
     background: linear-gradient(135deg, #f8fafc 0%, white 100%);
     font-weight: 500;
@@ -407,10 +410,10 @@ header, .header {
     justify-content: space-between;
     align-items: center;
     background: white;
-
     box-shadow: var(--shadow-sm);
     position: relative;
     border-bottom: 1px solid var(--border-color);
+    height: 5rem;
 }
 
 .header::before {
@@ -611,7 +614,7 @@ header h1, .header h1 {
 .page-subtitle {
     color: var(--text-secondary);
     margin-bottom: 24px;
-    font-size: 14px;
+    font-size: 1rem;
     letter-spacing: 0.1px;
 }
 
@@ -628,14 +631,6 @@ header h1, .header h1 {
     flex-wrap: wrap;
 }
 
-.control-panel-heading p{
-    margin-top: 0.5rem;
-}
-
-.control-panel-heading h1{
-    margin-bottom: 0;
-}
-
 .schedule,
 .manual {
     background: white;
@@ -644,14 +639,22 @@ header h1, .header h1 {
     flex: 1;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
     min-width: 340px;
+    border: 1px solid var(--border-color);
 }
 
 h2 {
     margin-top: 0;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+
     font-size: 1.3rem;
+    gap: 10px;
+}
+.schedule-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
 }
 
 /* Tab Styles */
@@ -690,6 +693,7 @@ h2 {
 
 .tab-content.active {
     display: block !important; /* Show only when active */
+
 }
 
 /* Remove this conflicting rule that was showing non-hidden tabs */
@@ -755,6 +759,7 @@ label {
     margin-top: 12px;
     font-weight: 500;
     font-size: 1.05rem;
+    
 }
 
 input[type="time"],
@@ -769,16 +774,17 @@ select {
     box-sizing: border-box;
     background: #fefefe;
     appearance: none;
+    
 }
+
+
 
 select {
     background-image: url("data:image/svg+xml;utf8,<svg fill='gray' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
     background-repeat: no-repeat;
     background-position: right 10px center;
     background-size: 16px 16px;
-    padding-right: 30px;
-
-
+    padding-right: 30px
 }
 
 /* Day Selection Buttons */
@@ -934,6 +940,7 @@ progress[value]::-webkit-progress-value {
 }
 
 .slider {
+
     position: absolute;
     cursor: pointer;
     top: 0;
@@ -1130,10 +1137,7 @@ header .badge {
     margin-bottom: 5px;
 }
 
-.support-container p {
-    margin-bottom: 20px;
-    color: #555;
-}
+
 
 .tabs {
     display: flex;
@@ -1147,6 +1151,7 @@ header .badge {
     margin-right: 10px;
     cursor: pointer;
     border-radius: 4px;
+    font-size: 1rem;
 }
 
 .tab.active {
@@ -1162,6 +1167,10 @@ header .badge {
     flex-wrap: wrap;
 }
 
+.form-section p {
+    margin-top: 1rem;
+}
+
 .form-section, .info-section {
     background: white;
     padding: 20px;
@@ -1170,11 +1179,13 @@ header .badge {
     border-radius: 8px;
 }
 
-.info-section strong {
+.info-section p {
     padding-top: 1rem;
+
 }
 
 form input, form textarea {
+    margin-top: 1rem;
     width: 100%;
     margin-bottom: 15px;
     padding: 10px;
@@ -1189,6 +1200,7 @@ form button {
     padding: 10px 16px;
     border-radius: 4px;
     cursor: pointer;
+    font-size: 1rem;
 }
 
 .help-center-btn {
@@ -1198,6 +1210,7 @@ form button {
     padding: 10px 16px;
     border-radius: 4px;
     cursor: pointer;
+    font-size: 1rem;
 }
 
 .hidden {
@@ -1343,6 +1356,7 @@ form button {
   background-color: #e2e8f0;
   cursor: pointer;
   font-weight: 500;
+  font-size: 1rem;
 }
 
 .srms-tab-button:hover {
@@ -1528,9 +1542,9 @@ form button {
   background-color: white;
 }
 
-.srms-header h1 {
+/* .srms-header h1 {
   font-size: 1.75rem;
-}
+} */
 
 .srms-header p {
   margin-top: 0.5rem;
@@ -1544,7 +1558,6 @@ form button {
 
 
 #user-management-container {
-
   padding: 1rem;
   background-color: white;
 }
@@ -1585,12 +1598,20 @@ form button {
 }
 
 .um-btn {
-  padding: 8px 16px;
-  border: none;
-  background-color: #ddd;
-  cursor: pointer;
-  border-radius: 6px;
+    background-color: #fff;
+    border
+Shorthand property for setting border width, style, and color.
+Learn more
+Don't show
+: 1px solid #d1d5db;
+    padding: 6px 14px;
+    border-radius: 8px;
+    font-weight: 500;
+    cursor: pointer;
+    font-size: 1rem;
 }
+
+.um-bt
 
 .um-btn-primary {
   background-color: var(--primary-color);
@@ -1719,7 +1740,7 @@ form button {
 
 .um-panel-subtitle {
   color: #6c757d;
-  font-size: 14px;
+  font-size: 1rem;
   margin-bottom: 16px;
 }
 
@@ -1739,7 +1760,7 @@ form button {
 
 .um-role-desc {
   margin: 4px 0 0;
-  font-size: 13px;
+  font-size: 1rem;
   color: #666;
 }
 
@@ -1828,7 +1849,7 @@ form button {
 .um-user-table td {
   text-align: center; /* Center the text */
   padding: 1rem 1.5rem;
-  font-size: 14px;
+  font-size: 1rem;
   border-bottom: 1px solid var(--border-color);
   vertical-align: middle;
 }
@@ -1932,6 +1953,7 @@ form button {
     padding: 10px 16px;
     border-radius: var(--radius-md);
     font-weight: 500;
+    font-size: 1rem;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -1955,6 +1977,7 @@ form button {
 }
 
 .stat-card {
+    display: flex;
     background-color: white;
     padding: 20px;
     border-radius: var(--radius-md);
@@ -1963,6 +1986,15 @@ form button {
     border: 1px solid var(--border-color);
     position: relative;
     overflow: hidden;
+    align-items: center;
+    justify-content: space-between; /* Add this to push all child divs to the end */
+}
+
+
+.large-icon {
+    font-size: 4rem;
+    color: var(--primary-color);
+ 
 }
 
 .stat-card:hover {
@@ -1988,7 +2020,7 @@ form button {
 
 .stat-card h3 {
     color: var(--text-secondary);
-    font-size: 14px;
+    font-size: 1rem;
     margin-bottom: 12px;
     font-weight: 500;
 }
@@ -2009,6 +2041,7 @@ form button {
 
 .stat-trend.positive {
     color: var(--primary-color) !important;
+    font-size: 1rem;
 }
 
 .stat-trend.negative {
@@ -2016,7 +2049,7 @@ form button {
 }
 
 .stat-info {
-    font-size: 14px;
+    font-size: 1rem;
     color: var(--text-secondary);
 }
 
@@ -2145,7 +2178,7 @@ form button {
 }
 
 .robot-info p {
-    font-size: 14px;
+    font-size: 1rem;
     color: var(--text-secondary);
     display: flex;
     align-items: center;
@@ -2211,7 +2244,7 @@ form button {
 
 .add-robot-content p {
     color: var(--text-secondary);
-    font-size: 14px;
+    font-size: 1rem;
     margin: 0;
 }
 
@@ -2301,10 +2334,11 @@ form button {
     display: flex;
     flex-direction: column;
     gap: 8px;
+
 }
 
 .weather-info p {
-    font-size: 14px;
+    font-size: 1rem;
     color: var(--text-secondary);
     margin: 0;
     display: flex;
@@ -2435,10 +2469,8 @@ form button {
         margin-bottom: 6px;
     }
     
-    .page-subtitle {
-        font-size: 13px;
-        margin-bottom: 16px;
-    }
+    
+    
     
     /* Tab container mobile improvements */
     .tab-container {
@@ -2453,7 +2485,7 @@ form button {
         padding: 12px 16px;
         border-bottom: 1px solid var(--border-color);
         text-align: left;
-        font-size: 14px;
+        font-size: 1rem;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -2467,6 +2499,7 @@ form button {
         background-color: var(--primary-color);
         color: white;
         font-weight: 600;
+        font-size: 1rem;
     }
     
     .tab.active:after {
@@ -2571,10 +2604,7 @@ form button {
         border-radius: 0;
     }
     
-    th, td {
-        padding: 12px 8px;
-        font-size: 13px;
-    }
+  
     
     th {
         background-color: #f1f3f4;
@@ -2611,9 +2641,7 @@ form button {
         font-size: 18px;
     }
     
-    .page-subtitle {
-        font-size: 12px;
-    }
+    
     
     /* Convert tabs to accordion style */
     .tab-container {
@@ -2991,7 +3019,7 @@ th,
 td {
     text-align: center; /* Center the text */
     padding: 1rem 1.5rem;
-    font-size: 14px;
+    font-size: 1rem;
     border-bottom: 1px solid var(--border-color);
     vertical-align: middle;
 }
@@ -3332,10 +3360,7 @@ tbody tr:hover {
         margin-bottom: 6px;
     }
 
-    .um-panel-subtitle {
-        font-size: 13px;
-        margin-bottom: 12px;
-    }
+
 
     /* Role list improvements */
     .um-role-item {
@@ -3435,13 +3460,8 @@ tbody tr:hover {
         font-size: 15px;
     }
 
-    .um-panel-subtitle {
-        font-size: 12px;
-    }
+    
 
-    .um-role-desc {
-        font-size: 12px;
-    }
 
     .um-activity-item {
         font-size: 13px;
