@@ -101,63 +101,65 @@
           <h2 class="um-panel-title">User Accounts</h2>
           <p class="um-panel-subtitle">Manage user accounts and their access levels</p>
 
-          <table class="um-user-table">
-            <thead>
-              <tr>
-                <th>User</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Role</th>
-                <th>Status</th>
-                <th>Last Login</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>
-                  <div class="um-avatar sm">JD</div>
-                </td>
-                <td><strong>John Doe</strong></td>
-                <td>john.doe@example.com</td>
-                <td><span class="um-role-badge blue">Admin</span></td>
-                <td><span class="um-status-indicator active"></span> Active</td>
-                <td>2h ago</td>
-                <td>
-                  <i class="fa-solid fa-pen-to-square"></i>
-                  <i class="fa-solid fa-lock"></i>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="um-avatar sm">JS</div>
-                </td>
-                <td><strong>Jane Smith</strong></td>
-                <td>jane.smith@example.com</td>
-                <td><span class="um-role-badge blue">Manager</span></td>
-                <td><span class="um-status-indicator active"></span> Active</td>
-                <td>1d ago</td>
-                <td>
-                  <i class="fa-solid fa-pen-to-square"></i>
-                  <i class="fa-solid fa-lock"></i>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="um-avatar sm">RJ</div>
-                </td>
-                <td><strong>Robert Johnson</strong></td>
-                <td>robert.johnson@example.com</td>
-                <td><span class="um-role-badge gray">Operator</span></td>
-                <td><span class="um-status-indicator active"></span> Active</td>
-                <td>3d ago</td>
-                <td>
-                  <i class="fa-solid fa-pen-to-square"></i>
-                  <i class="fa-solid fa-lock"></i>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="um-table-container">
+            <table class="um-user-table">
+              <thead>
+                <tr>
+                  <th>User</th>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Role</th>
+                  <th>Status</th>
+                  <th>Last Login</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td data-label="User">
+                    <div class="um-avatar sm">JD</div>
+                  </td>
+                  <td data-label="Name"><strong>John Doe</strong></td>
+                  <td data-label="Email">john.doe@example.com</td>
+                  <td data-label="Role"><span class="um-role-badge blue">Admin</span></td>
+                  <td data-label="Status"><span class="um-status-indicator active"></span> Active</td>
+                  <td data-label="Last Login">2h ago</td>
+                  <td data-label="Actions">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                    <i class="fa-solid fa-lock"></i>
+                  </td>
+                </tr>
+                <tr>
+                  <td data-label="User">
+                    <div class="um-avatar sm">JS</div>
+                  </td>
+                  <td data-label="Name"><strong>Jane Smith</strong></td>
+                  <td data-label="Email">jane.smith@example.com</td>
+                  <td data-label="Role"><span class="um-role-badge blue">Manager</span></td>
+                  <td data-label="Status"><span class="um-status-indicator active"></span> Active</td>
+                  <td data-label="Last Login">1d ago</td>
+                  <td data-label="Actions">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                    <i class="fa-solid fa-lock"></i>
+                  </td>
+                </tr>
+                <tr>
+                  <td data-label="User">
+                    <div class="um-avatar sm">RJ</div>
+                  </td>
+                  <td data-label="Name"><strong>Robert Johnson</strong></td>
+                  <td data-label="Email">robert.johnson@example.com</td>
+                  <td data-label="Role"><span class="um-role-badge gray">Operator</span></td>
+                  <td data-label="Status"><span class="um-status-indicator active"></span> Active</td>
+                  <td data-label="Last Login">3d ago</td>
+                  <td data-label="Actions">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                    <i class="fa-solid fa-lock"></i>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
 
           <div class="um-pagination">
             <span>Showing 3 of 10 users</span>

@@ -128,14 +128,80 @@ function showTab(tab, event) {
 
 // Modal functions
 function showModal() {
-  document.getElementById('verification-modal').style.display = 'flex';
+  // Create modal overlay
+  const modalOverlay = document.createElement('div');
+  modalOverlay.id = 'verification-modal';
+  modalOverlay.className = 'modal-overlay';
+
+  // Create modal content
+  const modalContent = document.createElement('div');
+  modalContent.className = 'modal-content';
+
+  // Create modal header
+  const modalHeader = document.createElement('div');
+  modalHeader.className = 'modal-header';
+  const modalTitle = document.createElement('h3');
+  modalTitle.textContent = 'Admin Verification Required';
+  const closeButton = document.createElement('button');
+  closeButton.className = 'close-btn';
+  closeButton.innerHTML = '&times;';
+  closeButton.onclick = closeModal;
+  modalHeader.appendChild(modalTitle);
+  modalHeader.appendChild(closeButton);
+  modalContent.appendChild(modalHeader);
+
+  // Create modal body
+  const modalBody = document.createElement('div');
+  modalBody.className = 'modal-body';
+  const modalText = document.createElement('p');
+  modalText.textContent = 'Please enter your verification code to start the robot.';
+  const codeLabel = document.createElement('label');
+  codeLabel.setAttribute('for', 'verification-code');
+  codeLabel.textContent = 'Verification Code';
+  const codeInput = document.createElement('input');
+  codeInput.type = 'password';
+  codeInput.id = 'verification-code';
+  codeInput.placeholder = 'Enter code...';
+  const demoNote = document.createElement('p');
+  demoNote.className = 'demo-note';
+  demoNote.innerHTML = 'For demo purposes, use code: <strong>123456</strong>';
+  modalBody.appendChild(modalText);
+  modalBody.appendChild(codeLabel);
+  modalBody.appendChild(codeInput);
+  modalBody.appendChild(demoNote);
+  modalContent.appendChild(modalBody);
+
+  // Create modal footer
+  const modalFooter = document.createElement('div');
+  modalFooter.className = 'modal-footer';
+  const cancelButton = document.createElement('button');
+  cancelButton.className = 'cancel-btn';
+  cancelButton.textContent = 'Cancel';
+  cancelButton.onclick = closeModal;
+  const verifyButton = document.createElement('button');
+  verifyButton.className = 'verify-btn';
+  verifyButton.textContent = 'Verify & Start';
+  verifyButton.onclick = verifyCode;
+  modalFooter.appendChild(cancelButton);
+  modalFooter.appendChild(verifyButton);
+  modalContent.appendChild(modalFooter);
+
+  modalOverlay.appendChild(modalContent);
+
+  // Append modal to body
+  document.body.appendChild(modalOverlay);
   document.body.classList.add('modal-open');
+
+  // Focus on the input
+  document.getElementById('verification-code').focus();
 }
 
 function closeModal() {
-  document.getElementById('verification-modal').style.display = 'none';
-  document.body.classList.remove('modal-open');
-  document.getElementById('verification-code').value = '';
+  const modalOverlay = document.getElementById('verification-modal');
+  if (modalOverlay) {
+    document.body.classList.remove('modal-open');
+    document.body.removeChild(modalOverlay);
+  }
 }
 
 function verifyCode() {

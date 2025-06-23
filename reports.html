@@ -616,6 +616,63 @@
                     }, { once: true });
                 });
             });
+
+            // Add mobile responsiveness enhancement
+            function enhanceMobileResponsiveness() {
+                // Function to handle table mobile view
+                function toggleCardView() {
+                    const tablesContainer = document.querySelectorAll('.logs-container');
+
+                    if (window.innerWidth <= 480) {
+                        // Add data attributes to table cells for mobile card view
+                        document.querySelectorAll('table').forEach(table => {
+                            const headers = Array.from(table.querySelectorAll('th')).map(th => th.textContent);
+
+                            table.querySelectorAll('tbody tr').forEach(row => {
+                                const cells = row.querySelectorAll('td');
+                                cells.forEach((cell, index) => {
+                                    if (index < headers.length) {
+                                        cell.setAttribute('data-label', headers[index]);
+                                    }
+                                });
+                            });
+                        });
+
+                        // Enable card view for very small screens
+                        tablesContainer.forEach(container => {
+                            container.classList.add('card-view-enabled');
+                        });
+                    } else {
+                        tablesContainer.forEach(container => {
+                            container.classList.remove('card-view-enabled');
+                        });
+                    }
+                }
+
+                // Initial call
+                toggleCardView();
+
+                // Re-apply on resize
+                window.addEventListener('resize', toggleCardView);
+
+                // Adjust dropdown positioning on mobile
+                const dropdowns = document.querySelectorAll('.dropdown');
+                dropdowns.forEach(dropdown => {
+                    dropdown.addEventListener('click', function (e) {
+                        const menu = document.getElementById(`${this.id}Menu`);
+
+                        // Ensure dropdown menu stays within viewport on mobile
+                        if (window.innerWidth <= 768) {
+                            menu.style.position = 'relative';
+                            menu.style.top = '5px';
+                            menu.style.left = '0';
+                        }
+                    });
+                });
+            }
+
+            // Call the mobile enhancement function
+            enhanceMobileResponsiveness();
         });
 
     </script>

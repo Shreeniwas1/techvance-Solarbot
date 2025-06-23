@@ -201,28 +201,8 @@
     </main>
   </div>
 
-  <!-- Modal Overlay -->
-  <div id="verification-modal" class="modal-overlay">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3>Admin Verification Required</h3>
-        <button class="close-btn" onclick="closeModal()">&times;</button>
-      </div>
-      <div class="modal-body">
-        <p>Please enter your verification code to start the robot.</p>
-        <label for="verification-code">Verification Code</label>
-        <input type="password" id="verification-code" placeholder="Enter code..." />
-        <p class="demo-note">For demo purposes, use code: <strong>123456</strong></p>
-      </div>
-      <div class="modal-footer">
-        <button class="cancel-btn" onclick="closeModal()">Cancel</button>
-        <button class="verify-btn" onclick="verifyCode()">Verify & Start</button>
-      </div>
-    </div>
-  </div>
-
   <script>
-   
+
 
     // Profile dropdown functionality
     function toggleProfileDropdown() {
@@ -281,12 +261,42 @@
 
     // Modal functions
     function showModal() {
-      document.getElementById('verification-modal').style.display = 'flex';
+      // Create modal overlay element
+      const modalOverlay = document.createElement('div');
+      modalOverlay.id = 'verification-modal';
+      modalOverlay.className = 'modal-overlay';
+
+      // Create modal content
+      modalOverlay.innerHTML = `
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3>Admin Verification Required</h3>
+            <button class="close-btn" onclick="closeModal()">&times;</button>
+          </div>
+          <div class="modal-body">
+            <p>Please enter your verification code to start the robot.</p>
+            <label for="verification-code">Verification Code</label>
+            <input type="password" id="verification-code" placeholder="Enter code..." />
+            <p class="demo-note">For demo purposes, use code: <strong>123456</strong></p>
+          </div>
+          <div class="modal-footer">
+            <button class="cancel-btn" onclick="closeModal()">Cancel</button>
+            <button class="verify-btn" onclick="verifyCode()">Verify & Start</button>
+          </div>
+        </div>
+      `;
+
+      // Append modal to body
+      document.body.appendChild(modalOverlay);
       document.body.classList.add('modal-open');
     }
 
     function closeModal() {
-      document.getElementById('verification-modal').style.display = 'none';
+      // Remove modal from DOM
+      const modal = document.getElementById('verification-modal');
+      if (modal) {
+        modal.parentNode.removeChild(modal);
+      }
       document.body.classList.remove('modal-open');
       document.getElementById('verification-code').value = '';
     }
