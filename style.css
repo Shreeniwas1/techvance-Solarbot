@@ -1826,10 +1826,10 @@ form button {
 
 .um-user-table th,
 .um-user-table td {
-  text-align: left;
-  padding: 1rem 2rem;
+  text-align: center; /* Center the text */
+  padding: 1rem 1.5rem;
   font-size: 14px;
-  border-bottom: 1px solid #f1f1f1;
+  border-bottom: 1px solid var(--border-color);
   vertical-align: middle;
 }
 
@@ -2873,7 +2873,7 @@ form button {
     width: 90%;
     max-width: 500px;
     animation: modalSlideIn 0.3s ease-in-out;
-}
+ }
 
 .modal-header {
     padding: 20px;
@@ -3012,7 +3012,7 @@ table {
 
 th,
 td {
-    text-align: left;
+    text-align: center; /* Center the text */
     padding: 1rem 1.5rem;
     font-size: 14px;
     border-bottom: 1px solid var(--border-color);
@@ -3047,5 +3047,76 @@ tbody tr:hover {
 .view-btn:hover {
     background-color: var(--hover-bg);
     color: var(--secondary-color);
+}
+
+/* Style for the filter and download buttons */
+.btn {
+    background-color: var(--primary-light);
+    color: var(--primary-dark);
+    border: none;
+    padding: 10px 16px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.btn:hover {
+    background-color: var(--hover-bg);
+    color: var(--secondary-color);
+}
+
+/* Style for the search input */
+.search-container {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-color);
+    padding: 8px 12px;
+    margin-bottom: 16px;
+}
+
+.search-input {
+    display: flex;
+    align-items: center;
+    flex: 1;
+}
+
+.search-input input {
+    border: none;
+    outline: none;
+    padding: 8px;
+    font-size: 14px;
+    color: var(--text-primary);
+    flex: 1;
+    background-color: transparent;
+}
+
+.search-container .icon {
+    color: var(--text-secondary);
+    margin-right: 8px;
+}
+
+.loading-sun {
+    width: 30px;
+    height: 30px;
+    background: var(--gradient-solar) !important;
+    box-shadow: 0 0 20px rgba(150, 136, 232, 0.5) !important;
+}
+
+.solar-tooltip.active {
+    opacity: 1;
+}
+
+.loading-indicator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
 }
 
