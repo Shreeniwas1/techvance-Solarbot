@@ -1305,7 +1305,7 @@ form button {
 .srms-tabs {
     display: flex;
     margin-bottom: 1.5rem;
-    background-color: #E2E8F0;
+    /* background-color: #E2E8F0; */
     max-width: 100%;
     padding: 3px;
     border-radius: 5px;
