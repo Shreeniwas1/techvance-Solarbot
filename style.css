@@ -165,7 +165,7 @@ body {
         background-color: var(--primary-light) !important;
         color: var(--primary-color) !important;
         position: absolute !important;
-        right: 50px !important;
+        right: 55px !important;
     }
 
 }
@@ -332,6 +332,7 @@ body {
 }
 
 .nav-item {
+    gap: 10px;
     display: flex;
     align-items: center;
     padding: 16px 24px;
@@ -404,7 +405,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-right: 16px;
+
     font-size: 16px;
     transition: all 0.3s ease;
 }
