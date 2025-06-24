@@ -752,7 +752,7 @@ h2 {
 .srms-tab-button {
     background: var(--primary-light) !important;
     color: var(--primary-dark) !important;
-    padding: 0.5rem 1rem !important; /* Reduced padding */
+    padding: 0.7rem 1rem !important; /* Reduced padding */
     flex: 1 !important; /* Each tab takes equal space */
     text-align: center !important;
     white-space: nowrap !important;
@@ -778,12 +778,7 @@ h2 {
 }
 
 /* Active tab styling */
-.srms-tab-active, 
-.srms-tab-button.active {
-    background: var(--primary-color) !important;
-    color: white !important;
-    font-weight: 500 !important;
-}
+
 
 .tab-content {
     display: none !important; /* Hidden by default with !important to override other styles */
@@ -964,8 +959,9 @@ select {
     height: 12px;
     width: 12px;
     border-radius: 50%;
-    background-color: var(--primary-dark) !important;
+    background-color: #C92A2A;
     display: inline-block;
+    margin-right: 1rem;
 }
 
 .status-dot.running {
@@ -973,7 +969,7 @@ select {
 }
 
 .status-dot.stopped {
-    background-color: var(--primary-light) !important;
+    background-color: #C92A2A;
 }
 
 /* Start Button */
@@ -1507,8 +1503,9 @@ form button {
 }
 
 .srms-tab-active {
-  background-color: #1A56B0;
+  background-color: var(--primary-color);
   color: #fff;
+  
   border: 1px solid #ddd;
   font-weight: bold;
 }
