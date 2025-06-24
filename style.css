@@ -565,7 +565,8 @@ header h1, .header h1 {
 /* Profile Dropdown Styles */
 .profile-container {
     position: relative;
-    z-index: 1050; /* Increase container z-index */
+    z-index: 50; /* Reduced z-index so it doesn't override sidebar (z-index: 10) */
+    display: inline-block; /* Ensure it doesn't break out of its container */
 }
 
 .profile-pic, .avatar {
