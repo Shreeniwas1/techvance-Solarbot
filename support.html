@@ -86,14 +86,9 @@
           <p class="page-subtitle">Get help with your solar robot system.</p>
         </div>
 
-        <div class="tabs">
-          <button class="tab active">Contact Support</button>
-          <button class="tab">Emergency Contact</button>
-        </div>
-
-        <div class="support-content">
+        <div class="support-content" style="display: flex; gap: 20px; flex-wrap: wrap;">
           <!-- Contact Support Section -->
-          <div class="form-section contact-tab">
+          <div class="form-section contact-tab" style="flex: 1; min-width: 300px;">
             <h3>Contact Support <i class="fa-solid fa-phone-volume"></i></h3>
             <p>Fill out the form to get help from our support team.</p>
             <form>
@@ -105,7 +100,7 @@
           </div>
 
           <!-- Emergency Contact Section -->
-          <div class="form-section emergency-tab hidden">
+          <div class="form-section" style="flex: 1; min-width: 300px;">
             <h3 class="emergency-title"><i class="fa-solid fa-circle-exclamation"></i> Emergency Contact</h3>
             <p>Use these contacts only in case of emergency situations.</p>
 
@@ -136,9 +131,10 @@
 
             <button class="emergency-call"><i class="fa-solid fa-phone"></i> Call Emergency Hotline</button>
           </div>
+        </div>
 
-          <!-- Contact Info Section -->
-          <div class="info-section contact-tab"></div>
+        <!-- Contact Info in its own row below -->
+        <div class="info-section" style="margin-top: 20px;">
           <h3>Contact Information <i class="fa-solid fa-circle-info"></i></h3>
           <p>Reach out to us directly using the following information.</p>
           <p><strong><i class="fa-solid fa-phone" style="color: #fd7272;"></i> Phone Support:</strong><br> +1 (800)
@@ -156,6 +152,8 @@
   </main>
   </div>
   <script>
+    // Remove the tab switching script since we're showing both sections
+    /*
     const tabs = document.querySelectorAll('.tab');
     const contactTabs = document.querySelectorAll('.contact-tab');
     const emergencyTab = document.querySelector('.emergency-tab');
@@ -174,6 +172,7 @@
         }
       });
     });
+    */
   </script>
   <script src="script.js"></script>
 </body>
