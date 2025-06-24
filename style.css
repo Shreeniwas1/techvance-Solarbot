@@ -164,8 +164,16 @@ body {
     .sidebar:not(.collapsed) ~ .main .sidebar-toggle {
         background-color: var(--primary-light) !important;
         color: var(--primary-color) !important;
-        position: absolute !important;
-        right: 55px !important;
+        position: fixed !important;
+        top: 24px !important;
+        left: calc(85% - 50px) !important; /* Moved more to the left for better visibility */
+        z-index: 1100 !important;
+        transition: all 0.3s ease !important;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1) !important;
+        /* border-radius: 50% !important; Make it round for better appearance */
+
+        width: 40px !important; /* Slightly larger button */
+        height: 40px !important;
     }
 
 }
