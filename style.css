@@ -132,6 +132,7 @@ body {
     /* Keep sidebar toggle at the left side in the header */
     .sidebar-toggle {
         position: relative !important;
+        /* padding: 0.5rem !important; */
         top: auto !important;
         right: auto !important;
         left: auto !important;
