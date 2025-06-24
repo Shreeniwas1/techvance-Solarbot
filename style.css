@@ -685,6 +685,37 @@ h2 {
 .srms-tab-button {
     background: var(--primary-light) !important;
     color: var(--primary-dark) !important;
+    padding: 0.5rem 1rem !important; /* Reduced padding */
+    flex: 1 !important; /* Each tab takes equal space */
+    text-align: center !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important; /* For text that doesn't fit */
+    font-size: 0.9rem !important; /* Smaller font size */
+    margin: 0 2px !important; /* Small gap between tabs */
+}
+
+/* Make sure parent container has display: flex */
+.srms-tabs {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important; /* Allow horizontal scrolling if needed */
+    width: 100% !important;
+    gap: 4px !important; /* Small gap between tabs */
+    padding: 2px !important;
+    scrollbar-width: none !important; /* Hide scrollbar in Firefox */
+}
+
+.srms-tabs::-webkit-scrollbar {
+    display: none !important; /* Hide scrollbar in Chrome/Safari */
+}
+
+/* Active tab styling */
+.srms-tab-active, 
+.srms-tab-button.active {
+    background: var(--primary-color) !important;
+    color: white !important;
+    font-weight: 500 !important;
 }
 
 .tab-content {
@@ -1327,20 +1358,18 @@ form button {
 }
 
 /* Media query for mobile screens */
+/* Media query for mobile screens */
 @media (max-width: 768px) {
     .srms-tabs {
-        flex-direction: column;
         width: 100%;
     }
     
     .srms-tab,
     .srms-tab-button {
         padding: 0.6rem 1rem;
-        width: 100%;
         text-align: center;
     }
 }
-
 /* Extra small mobile devices */
 @media (max-width: 480px) {
     .srms-tabs {
@@ -2760,45 +2789,172 @@ Don't show
         order: -1;
         margin-bottom: 4px;
     }
+/* Make tab buttons display side by side */
+.tab-container {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    background-color: #f8fafc;
+    border-radius: var(--radius-md) var(--radius-md) 0 0;
+    box-shadow: var(--shadow-sm);
+    width: 100%;
+    border-bottom: 2px solid var(--primary-light);
+    margin-bottom: 20px;
+    overflow: hidden;
+    position: relative;
 }
 
-/* Landscape mobile adjustments */
-@media (max-width: 768px) and (orientation: landscape) {
+.tab {
+    flex: 1 1 auto !important; /* Equal growth for better balance */
+    padding: 14px 18px !important;
+    white-space: nowrap !important;
+    text-align: center !important;
+    min-width: auto !important;
+    position: relative !important;
+    font-weight: 500 !important;
+    transition: all 0.3s ease !important;
+    color: var(--text-secondary) !important;
+    border-bottom: 3px solid transparent !important;
+    border-right: none !important;
+}
+
+.tab:hover {
+    background-color: rgba(150, 136, 232, 0.08) !important;
+    color: var(--primary-color) !important;
+}
+
+.tab.active {
+    background-color: #fff !important;
+    color: var(--primary-color) !important;
+    font-weight: 600 !important;
+    border-bottom: 3px solid var(--primary-color) !important;
+}
+
+.tab.active:after {
+    content: '' !important;
+    position: absolute !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    height: 3px !important;
+    background: var(--gradient-solar) !important;
+    border-radius: 3px 3px 0 0 !important;
+}
+
+/* Add subtle dividers between tabs */
+.tab:not(:last-child)::before {
+    content: '' !important;
+    position: absolute !important;
+    right: 0 !important;
+    top: 25% !important;
+    height: 50% !important;
+    width: 1px !important;
+    background-color: rgba(0, 0, 0, 0.07) !important;
+}
+
+/* Mobile optimizations to fit all tabs without scrolling */
+@media (max-width: 768px) {
     .tab-container {
-        flex-direction: row;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
+        background-color: white !important;
+        border-radius: var(--radius-md) !important;
+        border: 1px solid var(--border-color) !important;
     }
     
     .tab {
-        flex: 0 0 auto;
-        min-width: 120px;
-        text-align: center;
-        border-bottom: none;
-        border-right: 1px solid var(--border-color);
+        padding: 12px 10px !important;
+        font-size: 0.9rem !important;
     }
     
-    .tab:last-child {
-        border-right: none;
+    /* Active tab is more distinctive on mobile */
+    .tab.active {
+        box-shadow: 0 4px 8px rgba(150, 136, 232, 0.15) !important;
     }
-    
-    .filter-section {
-        flex-direction: row;
-        flex-wrap: wrap;
-        align-items: flex-end;
+    /* Hide icons in tabs on mobile */
+    @media (max-width: 768px) {
+        .tab i, 
+        .tab .icon,
+        .tab svg,
+        .tab .fa,
+        .tab [class*="icon-"],
+        .tab [class^="fa-"] {
+            display: none !important;
+        }
+        
+        .tab-container {
+            border: none !important;
+            box-shadow: none !important;
+        }
     }
-    
-    .filter-group {
-        flex: 1;
-        min-width: 150px;
+    /* Tablet devices (768px to 1024px) */
+    @media (min-width: 769px) and (max-width: 1024px) {
+        .tab-container {
+            margin-bottom: 20px !important;
+            border: none !important;
+            box-shadow: none !important;
+            display: flex !important;
+            flex-direction: row !important;
+            flex-wrap: nowrap !important;
+            width: 100% !important;
+            overflow-x: auto !important; /* Allow horizontal scrolling if needed */
+        }
+        
+        .tab {
+            padding: 12px 12px !important;
+            font-size: 0.9rem !important;
+            flex: 1 !important;
+            white-space: nowrap !important;
+            text-align: center !important;
+        }
+        
+        /* Hide icons in tabs on tablets, just like mobile */
+        .tab i, 
+        .tab .icon,
+        .tab svg,
+        .tab .fa,
+        .tab [class*="icon-"],
+        .tab [class^="fa-"] {
+            display: none !important;
+        }
     }
-    
-    .button-group {
-        flex-direction: row;
-        margin-top: 0;
-        align-self: flex-end;
+
+    /* Large tablets in landscape (1025px to 1200px) */
+    @media (min-width: 1025px) and (max-width: 1200px) {
+        .tab-container {
+            margin-bottom: 22px !important;
+        }
+        
+        .tab {
+            padding: 14px 16px !important;
+            font-size: 0.95rem !important;
+        }
     }
-}
+
+    /* Extra small screens */
+    @media (max-width: 480px) {
+        .tab-container {
+            margin-bottom: 16px !important;
+            border: none !important;
+        }
+        
+        .tab {
+            padding: 10px 8px !important;
+            font-size: 0.8rem !important;
+            letter-spacing: -0.2px !important;
+        }
+    }
+
+    /* Extremely small screens */
+    @media (max-width: 320px) {
+        .tab-container {
+            border-radius: var(--radius-sm) !important;
+            border: none !important;
+        }
+        
+        .tab {
+            padding: 8px 6px !important;
+            font-size: 0.75rem !important;
+        }
+    }
 
 /* Touch-friendly improvements */
 @media (hover: none) and (pointer: coarse) {
@@ -3472,3 +3628,4 @@ tbody tr:hover {
     }
 }
 
+}
