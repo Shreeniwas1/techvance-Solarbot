@@ -664,7 +664,7 @@ header h1, .header h1 {
     margin-bottom: 8px;
     color: var(--text-primary);
     font-weight: 600;
-    font-size: 24px;
+    font-size: 1.5rem; /* Increased from 24px */
     letter-spacing: 0.3px;
     position: relative;
     display: inline-block;
