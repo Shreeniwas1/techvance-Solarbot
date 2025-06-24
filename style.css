@@ -107,7 +107,7 @@ body {
         position: fixed !important;
         top: 0;
         left: 0;
-        width: 100% !important;
+        width: 90% !important;
         flex: none !important;
         z-index: 1000;
         height: 100vh;
