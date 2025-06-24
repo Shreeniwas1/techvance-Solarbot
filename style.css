@@ -4138,3 +4138,21 @@ tbody tr:hover {
 
 
 }
+.controls {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background: #fff;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 8px;
+    z-index: 9999;
+  }
+
+  .controls input,
+  .controls button {
+    margin: 5px;
+    padding: 5px 10px;
+    width: 100px;
+  }
+

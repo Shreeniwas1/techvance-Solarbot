@@ -296,5 +296,16 @@ document.addEventListener("DOMContentLoaded", () => {
         });
       });
     });
+//edit -1 
+function changeFontSizeConditionally(fromSize, toSize) {
+  const allElements = document.body.querySelectorAll('*');
+  allElements.forEach(el => {
+    const computedSize = window.getComputedStyle(el).fontSize;
+    if (computedSize === fromSize) {
+      el.style.fontSize = toSize;
+    }
+  });
+  alert(`Changed all font sizes from ${fromSize} to ${toSize}`);
+}
 
 //done
