@@ -2778,6 +2778,149 @@ Don't show
 /* PC/Desktop Table Styles */
 @media (min-width: 769px) {
     /* Table Container Styles */
+    /* Enhanced Modal Styles for PC View */
+    .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+        animation: fadeIn 0.3s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    .modal-content {
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+        width: 90%;
+        max-width: 500px;
+        animation: modalSlideIn 0.3s ease-in-out;
+        position: relative;
+        margin: auto;
+        overflow: hidden;
+        z-index: 1001;
+        display: block;
+    }
+
+    @keyframes modalSlideIn {
+        from {
+            opacity: 0;
+            transform: translateY(-50px) scale(0.9);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+    }
+
+    .modal-header {
+        padding: 20px;
+        border-bottom: 1px solid #eee;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .modal-header h3 {
+        margin: 0;
+        font-size: 1.3rem;
+        color: var(--text-primary);
+    }
+
+    .close-btn {
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: #888;
+        transition: color 0.2s ease;
+    }
+
+    .close-btn:hover {
+        color: var(--primary-color);
+    }
+
+    .modal-body {
+        padding: 20px;
+    }
+
+    .modal-body p {
+        margin-bottom: 15px;
+        color: #555;
+    }
+
+    .modal-body label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: 500;
+        color: var(--text-primary);
+    }
+
+    .modal-body input[type="password"] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        font-size: 1rem;
+        margin-bottom: 15px;
+        box-sizing: border-box;
+    }
+
+    .modal-body .demo-note {
+        font-size: 0.9rem;
+        color: #777;
+        margin-top: 5px;
+    }
+
+    .modal-footer {
+        padding: 20px;
+        border-top: 1px solid #eee;
+        display: flex;
+        justify-content: flex-end;
+        gap: 15px;
+    }
+
+    .cancel-btn,
+    .verify-btn {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 1rem;
+        transition: background-color 0.2s ease;
+    }
+
+    .cancel-btn {
+        background-color: #ddd;
+        color: #333;
+    }
+
+    .cancel-btn:hover {
+        background-color: #ccc;
+    }
+
+    .verify-btn {
+        background-color: var(--primary-color);
+        color: #fff;
+    }
+
+    .verify-btn:hover {
+        background-color: var(--primary-dark);
+    }
+
+    .modal-open {
+        overflow: hidden;
+    }
     .logs-container {
         background: white;
         border-radius: var(--radius-lg);
