@@ -274,7 +274,7 @@ body {
 }
 
 .sidebar-header {
-    padding: 28px 24px;
+    padding: 28px 28px;
     border-bottom: 1px solid var(--border-color);
     display: flex;
     align-items: center;
