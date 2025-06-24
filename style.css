@@ -26,6 +26,7 @@
     font-size: 18px; /* Add this line for global scaling (was typically 16px) */
 }
 
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -789,7 +790,7 @@ h2 {
     background: white;
     border-radius: 8px;
     box-shadow: var(--shadow-sm);
-    margin-top: 16px;
+
 }
 
 .tab-container {
