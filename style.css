@@ -164,7 +164,8 @@ body {
     .sidebar:not(.collapsed) ~ .main .sidebar-toggle {
         background-color: var(--primary-light) !important;
         color: var(--primary-color) !important;
-         ;
+        position: absolute !important;
+        right: 50px !important;
     }
 
 }
@@ -289,7 +290,7 @@ body {
 }
 
 .sidebar-header {
-    padding: 28px 24px;
+    padding: 28px 10px;
     border-bottom: 1px solid var(--border-color);
     display: flex;
     align-items: center;
