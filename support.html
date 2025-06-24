@@ -86,76 +86,89 @@
           <p class="page-subtitle">Get help with your solar robot system.</p>
         </div>
 
-        <div class="support-content" style="display: flex; gap: 20px; flex-wrap: wrap;">
-          <!-- Contact Support Section -->
-          <div class="form-section contact-tab" style="flex: 1; min-width: 300px;">
-            <h3>Contact Support <i class="fa-solid fa-phone-volume"></i></h3>
-            <p>Fill out the form to get help from our support team.</p>
-            <form>
-              <input type="text" placeholder="Name" required>
-              <input type="email" placeholder="Email" required>
-              <textarea placeholder="Message" required></textarea>
-              <button type="submit">Submit Request <i class="fa-solid fa-check"></i></button>
-            </form>
+        <!-- Restore tabs -->
+        <div class="tabs">
+          <button class="tab active">Contact Support</button>
+          <button class="tab">Emergency Contact</button>
+        </div>
+
+        <div class="support-content">
+          <!-- Contact Tab Content (includes both form and info) -->
+          <div class="contact-tab">
+            <!-- Two column layout for Contact Support -->
+            <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+              <!-- Contact Support Form Section -->
+              <div class="form-section" style="flex: 1; min-width: 300px;">
+                <h3>Contact Support <i class="fa-solid fa-phone-volume"></i></h3>
+                <p>Fill out the form to get help from our support team.</p>
+                <form>
+                  <input type="text" placeholder="Name" required>
+                  <input type="email" placeholder="Email" required>
+                  <textarea placeholder="Message" required></textarea>
+                  <button type="submit">Submit Request <i class="fa-solid fa-check"></i></button>
+                </form>
+              </div>
+
+              <!-- Contact Info Section -->
+              <div class="info-section" style="flex: 1; min-width: 300px;">
+                <h3>Contact Information <i class="fa-solid fa-circle-info"></i></h3>
+                <p>Reach out to us directly using the following information.</p>
+                <p><strong><i class="fa-solid fa-phone" style="color: #fd7272;"></i> Phone Support:</strong><br> +1
+                  (800)
+                  123-4567<br>Mon - Fri, 9:30AM - 5:30PM IST</p>
+                <p><strong><i class="fa-solid fa-envelope" style="color: #fd7272;"></i> Email Support:</strong><br>
+                  support@jagrutsolarbot.example.com<br>Response within 24 hours</p>
+                <p><strong><i class="fa-solid fa-message" style="color: #fd7272;"></i> Live Chat:</strong><br> Available
+                  on
+                  our website<br>Mon - Fri, 9:30AM - 5:30PM IST</p>
+                <button class="help-center-btn"><i class="fa-solid fa-question"></i> Visit Help Center</button>
+              </div>
+            </div>
           </div>
 
           <!-- Emergency Contact Section -->
-          <div class="form-section" style="flex: 1; min-width: 300px;">
-            <h3 class="emergency-title"><i class="fa-solid fa-circle-exclamation"></i> Emergency Contact</h3>
-            <p>Use these contacts only in case of emergency situations.</p>
+          <div class="emergency-tab hidden">
+            <div class="form-section">
+              <h3 class="emergency-title"><i class="fa-solid fa-circle-exclamation"></i> Emergency Contact</h3>
+              <p>Use these contacts only in case of emergency situations.</p>
 
-            <div class="emergency-box">
-              <p><strong><i class="fa-solid fa-phone"></i> Emergency Hotline</strong><br>
-                <span class="emergency-number">+1 (800) 999-8888</span><br>
-                <small>Available 24/7 for critical issues</small>
-              </p>
+              <div class="emergency-box">
+                <p><strong><i class="fa-solid fa-phone"></i> Emergency Hotline</strong><br>
+                  <span class="emergency-number">+1 (800) 999-8888</span><br>
+                  <small>Available 24/7 for critical issues</small>
+                </p>
+              </div>
+
+              <div class="emergency-reasons">
+                <p><strong>When to use emergency contact:</strong></p>
+                <ul>
+                  <li>Robot malfunction causing safety hazards</li>
+                  <li>System security breach</li>
+                  <li>Electrical issues or fire hazards</li>
+                  <li>Physical damage to solar panels or equipment</li>
+                </ul>
+              </div>
+
+              <div class="emergency-response">
+                <p><strong><i class="fa-solid fa-van-shuttle fa-flip-horizontal"></i> On-Site Emergency
+                    Response</strong><br>
+                  For critical hardware failures or safety issues, we can dispatch a technician to your location.<br>
+                  <strong>Response time:</strong> Within 4 hours
+                </p>
+              </div>
+
+              <button class="emergency-call"><i class="fa-solid fa-phone"></i> Call Emergency Hotline</button>
             </div>
-
-            <div class="emergency-reasons">
-              <p><strong>When to use emergency contact:</strong></p>
-              <ul>
-                <li>Robot malfunction causing safety hazards</li>
-                <li>System security breach</li>
-                <li>Electrical issues or fire hazards</li>
-                <li>Physical damage to solar panels or equipment</li>
-              </ul>
-            </div>
-
-            <div class="emergency-response">
-              <p><strong><i class="fa-solid fa-van-shuttle fa-flip-horizontal"></i> On-Site Emergency
-                  Response</strong><br>
-                For critical hardware failures or safety issues, we can dispatch a technician to your location.<br>
-                <strong>Response time:</strong> Within 4 hours
-              </p>
-            </div>
-
-            <button class="emergency-call"><i class="fa-solid fa-phone"></i> Call Emergency Hotline</button>
           </div>
-        </div>
-
-        <!-- Contact Info in its own row below -->
-        <div class="info-section" style="margin-top: 20px;">
-          <h3>Contact Information <i class="fa-solid fa-circle-info"></i></h3>
-          <p>Reach out to us directly using the following information.</p>
-          <p><strong><i class="fa-solid fa-phone" style="color: #fd7272;"></i> Phone Support:</strong><br> +1 (800)
-            123-4567<br>Mon - Fri, 9:30AM
-            - 5:30PM IST</p>
-          <p><strong><i class="fa-solid fa-envelope" style="color: #fd7272;"></i> Email Support:</strong><br>
-            support@jagrutsolarbot.example.com<br>Response within 24 hours</p>
-          <p><strong><i class="fa-solid fa-message" style="color: #fd7272;"></i> Live Chat:</strong><br> Available on
-            our website<br>Mon -
-            Fri, 9:30AM - 5:30PM IST</p>
-          <button class="help-center-btn"><i class="fa-solid fa-question"></i> Visit Help Center</button>
         </div>
       </div>
   </div>
   </main>
   </div>
   <script>
-    // Remove the tab switching script since we're showing both sections
-    /*
+    // Restore the tab switching script
     const tabs = document.querySelectorAll('.tab');
-    const contactTabs = document.querySelectorAll('.contact-tab');
+    const contactTab = document.querySelector('.contact-tab');
     const emergencyTab = document.querySelector('.emergency-tab');
 
     tabs.forEach(tab => {
@@ -164,15 +177,14 @@
         tab.classList.add('active');
 
         if (tab.textContent.includes('Emergency')) {
-          contactTabs.forEach(el => el.classList.add('hidden'));
+          contactTab.classList.add('hidden');
           emergencyTab.classList.remove('hidden');
         } else {
-          contactTabs.forEach(el => el.classList.remove('hidden'));
+          contactTab.classList.remove('hidden');
           emergencyTab.classList.add('hidden');
         }
       });
     });
-    */
   </script>
   <script src="script.js"></script>
 </body>

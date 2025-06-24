@@ -111,22 +111,35 @@ body {
         flex: none !important;
         z-index: 1000;
         height: 100vh;
-        transform: translateY(-100%);
+        transform: translateX(-100%);
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-        transition: none !important; /* Disable animation for mobile */
+        transition: transform 0.3s ease !important; /* Enable smooth animation */
     }
     
     .sidebar.collapsed {
-        transform: translateY(-100%);
+        transform: translateX(-100%);
     }
     
     .sidebar:not(.collapsed) {
-        transform: translateY(0);
+        transform: translateX(0);
+    }
+    
+    /* Add overlay when sidebar is open */
+    .sidebar:not(.collapsed)::after {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: -1;
     }
     
     .main {
         width: 100% !important;
         margin-left: 0 !important;
+        overflow-x: hidden !important; /* Prevent horizontal overflow */
     }
     
     /* Keep sidebar toggle at the left side in the header */
@@ -152,6 +165,7 @@ body {
         background-color: var(--primary-light) !important;
         color: var(--primary-color) !important;
     }
+
 }
 
 .premium-header {
@@ -274,7 +288,7 @@ body {
 }
 
 .sidebar-header {
-    padding: 28px 28px;
+    padding: 28px 24px;
     border-bottom: 1px solid var(--border-color);
     display: flex;
     align-items: center;
@@ -1265,7 +1279,31 @@ header .badge {
 
 .info-section p {
     padding-top: 1rem;
+}
 
+/* Mobile responsive styles */
+@media (max-width: 768px) {
+    .form-section, .info-section {
+        flex: 1 1 100%; /* Full width on mobile */
+        margin-bottom: 20px;
+        padding: 16px;
+    }
+    
+    .support-content {
+        flex-direction: column;
+    }
+}
+
+/* Small mobile devices */
+@media (max-width: 480px) {
+    .form-section, .info-section {
+        padding: 12px;
+        border-radius: 6px;
+    }
+    
+    .form-section p, .info-section p {
+        font-size: 0.95rem;
+    }
 }
 
 form input, form textarea {
@@ -4074,5 +4112,6 @@ tbody tr:hover {
         font-size: 11px;
     }
 }
+
 
 }
