@@ -113,7 +113,7 @@ body {
         height: 100vh;
         transform: translateX(-100%);
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-        transition: transform 0.3s ease !important; /* Enable smooth animation */
+        transition: none !important; /* Disable animation */
     }
     
     .sidebar.collapsed {
