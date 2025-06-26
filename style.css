@@ -82,7 +82,7 @@ body {
     display: flex;
     flex-direction: column;
     box-shadow: 4px 0 20px rgba(0, 0, 0, 0.08);
-    transition: transform 0.3s ease, width 0.3s ease, flex 0.3s ease;
+    transition: none !important;
 }
 
 /* Additional sidebar collapsed style */
