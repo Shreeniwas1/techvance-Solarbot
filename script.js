@@ -42,6 +42,17 @@ document.addEventListener('DOMContentLoaded', function() {
     // Add the event listener
     sidebarToggleBtn.addEventListener('click', toggleSidebar);
   }
+
+  // Collapse sidebar on nav item click in mobile view
+  const navItems = document.querySelectorAll('.nav-item');
+  navItems.forEach(item => {
+    item.addEventListener('click', function() {
+      // Check for mobile view and if sidebar is open
+      if (window.innerWidth <= 768 && sidebar && !sidebar.classList.contains('collapsed')) {
+        toggleSidebar();
+      }
+    });
+  });
   
   // Rest of the DOMContentLoaded initialization code
   const profilePic = document.getElementById('profilePic');
