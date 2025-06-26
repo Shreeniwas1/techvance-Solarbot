@@ -82,7 +82,7 @@ body {
     display: flex;
     flex-direction: column;
     box-shadow: 4px 0 20px rgba(0, 0, 0, 0.08);
-    transition: transform 0.3s ease, width 0.3s ease, flex 0.3s ease;
+    transition: none !important;
 }
 
 /* Additional sidebar collapsed style */
@@ -113,7 +113,7 @@ body {
         height: 100vh;
         transform: translateX(-100%);
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-        transition: transform 0.3s ease !important; /* Enable smooth animation */
+        transition: none !important; /* Disable animation */
     }
     
     .sidebar.collapsed {
@@ -1222,7 +1222,7 @@ input:checked + .slider:before {
 }
 
 
-/* ///////////////////////////////////////////////////////////////////////// */
+
 
 
 
@@ -1481,6 +1481,18 @@ form button {
 /* Media query for mobile screens */
 /* Media query for mobile screens */
 @media (max-width: 768px) {
+    body {
+        font-size: 0.9rem;
+    }
+
+    .page-title {
+        font-size: 1.3rem;
+    }
+
+    .page-subtitle {
+        font-size: 0.9rem;
+    }
+
     .srms-tabs {
         width: 100%;
     }
@@ -1495,6 +1507,14 @@ form button {
 @media (max-width: 480px) {
     .srms-tabs {
         gap: 4px;
+    }
+}
+
+@media (max-width: 480px) {
+    .fa-server,
+    .fa-tools,
+    .fa-broom {
+        display: none !important;
     }
 }
 
@@ -1997,7 +2017,49 @@ Don't show
 }
 
 .um-user-table th,
+
+.um-table-container {
+  overflow-x: auto;
+}
+
 .um-user-table td {
+
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid #f1f1f1;
+}
+
+@media (max-width: 768px) {
+  .um-user-table thead {
+    display: none;
+  }
+
+  .um-user-table, .um-user-table tbody, .um-user-table tr, .um-user-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .um-user-table tr {
+    margin-bottom: 15px;
+  }
+
+  .um-user-table td {
+    text-align: right;
+    padding-left: 50%;
+    position: relative;
+  }
+
+  .um-user-table td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 0;
+    width: 50%;
+    padding-left: 15px;
+    font-weight: bold;
+    text-align: left;
+  }
+}
+
   text-align: center; /* Center the text */
   padding: 1rem 1.5rem;
   font-size: 1rem;
