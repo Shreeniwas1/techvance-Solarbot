@@ -1510,6 +1510,14 @@ form button {
     }
 }
 
+@media (max-width: 480px) {
+    .fa-server,
+    .fa-tools,
+    .fa-broom {
+        display: none !important;
+    }
+}
+
 .srms-tab,
 .srms-tab-button {
   padding: 0.6rem 6.8rem;
