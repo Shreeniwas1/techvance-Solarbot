@@ -1481,6 +1481,18 @@ form button {
 /* Media query for mobile screens */
 /* Media query for mobile screens */
 @media (max-width: 768px) {
+    body {
+        font-size: 0.9rem;
+    }
+
+    .page-title {
+        font-size: 1.3rem;
+    }
+
+    .page-subtitle {
+        font-size: 0.9rem;
+    }
+
     .srms-tabs {
         width: 100%;
     }
